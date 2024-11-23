@@ -32,10 +32,18 @@ def book_creation():
 def generate_bibtex():
     books = get_books()
     db_bib = BibDatabase()
+
+    def generate_book_id(book):
+        author_last_name = book.author.split(" ")[-1]
+        title = book.title
+        year = book.year
+        book_id = author_last_name + title + str(year)
+        return book_id
+    
     db_bib.entries = [
         {
             "ENTRYTYPE": "book",
-            "ID": str(book.id),
+            "ID": generate_book_id(book),
             "author": book.author,
             "title": book.title,
             "year": str(book.year),
