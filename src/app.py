@@ -1,7 +1,10 @@
-from flask import redirect, render_template, request, jsonify
+from flask import redirect, render_template, request, jsonify, send_file
 from db_helper import reset_db
 from repositories.book_repository import get_books, create_book
 from config import app, test_env
+from bibtexparser.bwriter import BibTexWriter
+from bibtexparser.bibdatabase import BibDatabase
+import io
 
 # Lataa nykyiset kirjat alkunäytölle
 @app.route("/")
@@ -23,6 +26,32 @@ def book_creation():
     year = request.form.get("year")
     create_book(author, title, publisher, year)
     return redirect("/")
+
+# Luo txt-muotoisen tiedoston, jossa ovat kaikki kirjat BibTeX muodossa
+@app.route("/generate_bibtex")
+def generate_bibtex():
+    books = get_books()
+    db_bib = BibDatabase()
+    db_bib.entries = [
+        {
+            "ENTRYTYPE": "book",
+            "ID": str(book.id),
+            "author": book.author,
+            "title": book.title,
+            "year": str(book.year),
+            "publisher": book.publisher,
+        }
+        for book in books
+    ]
+    writer = BibTexWriter()
+    bibtex_string = writer.write(db_bib)
+    
+    return send_file(
+        io.BytesIO(bibtex_string.encode("utf-8")),
+        mimetype="tetx/plain",
+        as_attachment=True,
+        download_name="Bibtex.txt"
+    )
 
 # testausta varten oleva reitti
 if test_env:
