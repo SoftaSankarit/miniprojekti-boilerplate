@@ -35,7 +35,7 @@ def generate_bibtex():
 
     def generate_book_id(book):
         author_last_name = book.author.split(" ")[-1]
-        title = book.title
+        title = book.title.split(" ")[0]
         year = book.year
         book_id = author_last_name + title + str(year)
         return book_id
@@ -58,7 +58,7 @@ def generate_bibtex():
         io.BytesIO(bibtex_string.encode("utf-8")),
         mimetype="tetx/plain",
         as_attachment=True,
-        download_name="Bibtex.txt"
+        download_name= "Bibtex.txt"
     )
 
 # testausta varten oleva reitti
