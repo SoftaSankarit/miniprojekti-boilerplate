@@ -25,6 +25,7 @@ Viitesovellus
                 <td>{{ book.title }}</td>
                 <td>{{ book.publisher }}</td>
                 <td>{{ book.year }}</td>
+                <td><a href="/delete_entry/book/{{book.id}}">Poista</a></td>
             </tr>
             {% endfor %}
         </tbody>

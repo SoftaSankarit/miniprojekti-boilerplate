@@ -1,6 +1,6 @@
 from flask import redirect, render_template, request, jsonify, send_file
 from db_helper import reset_db
-from repositories.book_repository import get_books, create_book
+from repositories.book_repository import get_books, create_book, delete_book
 from config import app, test_env
 from bibtexparser.bwriter import BibTexWriter
 from bibtexparser.bibdatabase import BibDatabase
@@ -60,7 +60,12 @@ def generate_bibtex():
         as_attachment=True,
         download_name= "Bibtex.txt"
     )
-
+#Poistaa viitteen tietokannasta 
+@app.route("/delete_entry/<entry_type>/<entry_id>")
+def delete_entry(entry_type,entry_id):
+    if entry_type == "book":
+        delete_book(entry_id)
+    return redirect("/")
 # testausta varten oleva reitti
 if test_env:
     @app.route("/reset_db")
