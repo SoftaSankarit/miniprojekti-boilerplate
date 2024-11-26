@@ -7,17 +7,18 @@ Viitesovellus
 {% block body %}
 
 <h1>Viitteet</h1>
-    
+<div class="custom_box">   
 {% if books %}
+<p>Kirjat:</p>
     <table>
-        <head>
+        <thead>
             <tr>
                 <th>Author</th>
                 <th>Title</th>
                 <th>Publisher</th>
                 <th>Year</th>
             </tr>
-        </head>
+        </thead>
         <tbody>
             {% for book in books %}
             <tr>
@@ -33,7 +34,7 @@ Viitesovellus
 {% else %}
     <p>Ei kirjoja tietokannassa.</p>
 {% endif %}
-
+</div>
 <p><a href="/new_book">Lisää uusi kirja</a></p>
 
 <p><a href="/generate_bibtex">Luo BibTeX-tiedosto</a></p>
