@@ -20,9 +20,9 @@ def new_book():
 # Luo kirjan databaseen riippuen syötteistä
 @app.route("/create_book", methods=["GET","POST"])
 def book_creation():
-    author = request.form.get("author")
-    title = request.form.get("title")
-    publisher = request.form.get("publisher")
+    author = request.form.get("author").strip()
+    title = request.form.get("title").strip()
+    publisher = request.form.get("publisher").strip()
     year = request.form.get("year")
     create_book(author, title, publisher, year)
     return redirect("/")
