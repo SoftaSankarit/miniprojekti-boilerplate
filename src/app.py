@@ -13,12 +13,13 @@ def index():
     print(books)
     return render_template("index.html", books=books)
 
-@app.route("/new_book")
-def new_book():
-    return render_template("new_book.html")
+@app.route("/new/<ref_type>")
+def new_book(ref_type):
+    if ref_type == "book":
+        return render_template("new_book.html")
 
 # Luo kirjan databaseen riippuen syötteistä
-@app.route("/create_book", methods=["GET","POST"])
+@app.route("/new/create_book", methods=["GET","POST"])
 def book_creation():
     author = request.form.get("author").strip()
     title = request.form.get("title").strip()

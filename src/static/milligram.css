@@ -11,13 +11,22 @@
   margin-bottom: 15px;
 }
 
-/* Luo laatikon tekstin ympärille*/
-.custom_box {
+/* Laatikko kirjoille*/
+.kirjat {
   background-color: #b0bdc9;
   color: #0c0052;
   max-width: 60%;
   padding: 40px;
   border: 2px solid rgb(52, 0, 173);
+  margin-top: 20px; 
+}
+
+.artikkelit {
+  background-color: #b2c9b0;
+  color: #035200;
+  max-width: 60%;
+  padding: 40px;
+  border: 2px solid rgb(35, 173, 0);
   margin-top: 20px; 
 }
 
