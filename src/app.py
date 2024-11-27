@@ -1,6 +1,6 @@
 from flask import redirect, render_template, request, jsonify, send_file
 from db_helper import reset_db
-from repositories.book_repository import get_books, create_book, delete_book
+from repositories.book_repository import get_books, get_book_by_id, create_book, delete_book, edit_book
 from config import app, test_env
 from bibtexparser.bwriter import BibTexWriter
 from bibtexparser.bibdatabase import BibDatabase
@@ -66,6 +66,24 @@ def delete_entry(entry_type,entry_id):
     if entry_type == "book":
         delete_book(entry_id)
     return redirect("/")
+
+
+#Muokkaa viitettä
+@app.route("/edit_entry/<entry_type>/<entry_id>", methods=["GET", "POST"])
+def edit_entry(entry_type,entry_id):
+    if entry_type == "book":
+        book = get_book_by_id(entry_id)
+        if request.method == "GET":
+            return render_template("new_book.html", book=book, is_edit=True)
+        if request.method == "POST":
+            author = request.form.get("author").strip()
+            title = request.form.get("title").strip()
+            publisher = request.form.get("publisher").strip()
+            year = request.form.get("year")
+            edit_book(id=entry_id, author=author, title=title, publisher=publisher, year=year)
+            print(book.id)
+            return redirect("/")
+
 # testausta varten oleva reitti
 if test_env:
     @app.route("/reset_db")
