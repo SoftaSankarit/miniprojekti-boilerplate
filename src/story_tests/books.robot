@@ -9,6 +9,7 @@ At the start there are no books
     Go To  ${HOME_URL}
     Title Should Be  Viitesovellus
     Page Should Contain  Ei kirjoja tietokannassa.
+
 After adding a book, there is one
     Go To  ${HOME_URL}
     Click Link  Lisää uusi kirja
@@ -36,3 +37,23 @@ After deleting a book, there are none
     Click Button  Lisää
     Click Link  Poista
     Page Should Contain  Ei kirjoja tietokannassa.
+
+After editing book values change
+    Go To  ${HOME_URL}
+    Click Link  Lisää uusi kirja
+    Input Text  author  Erkki Esimerkki
+    Input Text  title  Otsikko
+    Input Text  publisher  Julkaisija
+    Input Text  year  2024
+    Click Button  Lisää
+    Click Link  Muokkaa
+    Input Text  year  2019
+    Click Button  Muokkaa
+    Page Should Contain  Tekijät
+    Page Should Contain  Teoksen nimi
+    Page Should Contain  Kustantaja
+    Page Should Contain  Julkaisuvuosi
+    Page Should Contain  Erkki Esimerkki
+    Page Should Contain  Otsikko
+    Page Should Contain  Julkaisija
+    Page Should Contain  2019
