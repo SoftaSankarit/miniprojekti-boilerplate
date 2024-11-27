@@ -15,7 +15,7 @@ def create_book(author, title, publisher, year):
     new_book = Book(author=author,
                     title=title,
                     publisher=publisher,
-                    year=year) 
+                    year=year)
     db.session.add(new_book)
     db.session.commit()
 
@@ -31,3 +31,4 @@ def edit_book(id, author, title, publisher, year):
     book.publisher = publisher
     book.year = year
     db.session.commit()
+    

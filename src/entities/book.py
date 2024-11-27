@@ -8,3 +8,4 @@ class Book(db.Model):
     title = db.Column(db.String(100), nullable=False)
     publisher = db.Column(db.String(100), nullable=False)
     year = db.Column(db.Integer, nullable=False)
+    

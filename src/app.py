@@ -1,10 +1,10 @@
 from flask import redirect, render_template, request, jsonify, send_file
-from db_helper import reset_db
-from repositories.book_repository import get_books, get_book_by_id, create_book, delete_book, edit_book
-from config import app, test_env
 from bibtexparser.bwriter import BibTexWriter
 from bibtexparser.bibdatabase import BibDatabase
 import io
+from db_helper import reset_db
+from repositories.book_repository import get_books, get_book_by_id, create_book, delete_book, edit_book
+from config import app, test_env
 
 # Lataa nykyiset kirjat alkunäytölle
 @app.route("/")
