@@ -16,11 +16,11 @@ After adding a book, there is one
     Input Text  title  Otsikko
     Input Text  publisher  Julkaisija
     Input Text  year  2024
-    Click Button  Submit
-    Page Should Contain  Author
-    Page Should Contain  Title
-    Page Should Contain  Publisher
-    Page Should Contain  Year
+    Click Button  Lisää
+    Page Should Contain  Tekijät
+    Page Should Contain  Teoksen nimi
+    Page Should Contain  Kustantaja
+    Page Should Contain  Julkaisuvuosi
     Page Should Contain  Erkki Esimerkki
     Page Should Contain  Otsikko
     Page Should Contain  Julkaisija
@@ -33,6 +33,6 @@ After deleting a book, there are none
     Input Text  title  Otsikko
     Input Text  publisher  Julkaisija
     Input Text  year  2024
-    Click Button  Submit
+    Click Button  Lisää
     Click Link  Poista
     Page Should Contain  Ei kirjoja tietokannassa.
