@@ -7,9 +7,9 @@ env:
 
 on:
   push:
-    branches: [main]
+    branches: [main, pylint]
   pull_request:
-    branches: [main]
+    branches: [main, pylint]
 
 jobs:
   build:
