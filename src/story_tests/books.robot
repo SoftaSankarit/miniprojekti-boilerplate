@@ -23,5 +23,16 @@ After adding a book, there is one
     Page Should Contain  Year
     Page Should Contain  Erkki Esimerkki
     Page Should Contain  Otsikko
-    Page Should Contain  Julkaisia
+    Page Should Contain  Julkaisija
     Page Should Contain  2024
+
+After deleting a book, there are none
+    Go To  ${HOME_URL}
+    Click Link  Lisää uusi kirja
+    Input Text  author  Erkki Esimerkki
+    Input Text  title  Otsikko
+    Input Text  publisher  Julkaisija
+    Input Text  year  2024
+    Click Button  Submit
+    Click Link  Poista
+    Page Should Contain  Ei kirjoja tietokannassa.
