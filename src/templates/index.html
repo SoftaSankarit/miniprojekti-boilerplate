@@ -27,7 +27,7 @@ Viitesovellus
                 <td>{{ book.publisher }}</td>
                 <td>{{ book.year }}</td>
                 <td><button><a href="/delete_entry/book/{{book.id}}" style="color:aliceblue">Poista</a></button></td>
-                <td><button><a href="/edit_entry/book/{{edit.id}}" style="color:aliceblue">Muokkaa</a></button></td>
+                <td><button><a href="/edit_entry/book/{{book.id}}" style="color:aliceblue">Muokkaa</a></button></td>
             </tr>
             {% endfor %}
         </tbody>
