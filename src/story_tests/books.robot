@@ -14,7 +14,7 @@ After adding a book, there is one
     Click Link  Lisää uusi kirja
     Input Text  author  Erkki Esimerkki
     Input Text  title  Otsikko
-    Input Text  publisher  Julkaisia
+    Input Text  publisher  Julkaisija
     Input Text  year  2024
     Click Button  Submit
     Page Should Contain  Author
