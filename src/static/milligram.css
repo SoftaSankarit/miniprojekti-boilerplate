@@ -11,6 +11,15 @@
   margin-bottom: 15px;
 }
 
+/* Luo laatikon tekstin ympärille*/
+.custom_box {
+  background-color: #b0bdc9;
+  color: #0c0052;
+  max-width: 40%;
+  padding: 40px;
+  border: 2px solid rgb(52, 0, 173);
+  margin-top: 20px; 
+}
 
 label {
   display: block;
@@ -48,8 +57,8 @@ html {
 }
 
 body {
-  background-color: #cfb79f; /*Itse lisätty */
-  color: #2e152a;
+  background-color: #d4baa0; /*Itse lisätty */
+  color: #520052;
   font-family: 'Roboto', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
   font-size: 1.6em;
   font-weight: 300;

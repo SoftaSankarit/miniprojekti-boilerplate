@@ -16,3 +16,6 @@ def create_book(author, title, publisher, year):
     db.session.add(new_book)
     db.session.commit()
 
+def delete_book(id):
+    Book.query.filter_by(id=id).delete()
+    db.session.commit()
