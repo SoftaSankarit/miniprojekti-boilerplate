@@ -3,15 +3,12 @@
   <head>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="{{ url_for('static', filename='milligram.css') }}"/>
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <title>{% block title %}{% endblock %}</title>
-  </head>
+</head>
   <body>
-      <center> 
-    {% block body %}{% endblock %}
-      </center>
+    <center> 
+  {% block body %}{% endblock %}
+    </center>
   </body>
 </html>
