@@ -49,4 +49,4 @@ jobs:
       - name: Run robot tests
         run: bash run_robot_tests.sh
       - name: Run pylint
-        run: pylint src
+        run: poetry run pylint src/
