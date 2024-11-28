@@ -36,8 +36,11 @@ Viitesovellus
     <p>Ei kirjoja tietokannassa.</p>
 {% endif %}
 </div>
-<p><button><a href="/new_book" style="color:aliceblue">Lisää uusi kirja</a></button></p>
-
-<p><button><a href="/generate_bibtex" style="color: aliceblue;">Luo BibTeX-tiedosto</a></button></p>
-
+<br></br>
+<button style="display: inline-block; margin-right: 10px;">
+    <a href="/new_book" style="color:aliceblue">Lisää uusi kirja</a>
+</button>
+<button style="display: inline-block;">
+    <a href="/generate_bibtex" style="color: aliceblue;">Luo BibTeX-tiedosto</a>
+</button>
 {% endblock %}
