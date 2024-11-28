@@ -26,7 +26,7 @@ Viitesovellus
                 <td>{{ book.title }}</td>
                 <td>{{ book.publisher }}</td>
                 <td>{{ book.year }}</td>
-                <td><button><a href="/delete_entry/book/{{book.id}}" style="color:aliceblue" onclick="return confirm('Are you sure?')" >Poista</a></button></td>
+                <td><button><a href="/delete_entry/book/{{book.id}}" style="color:aliceblue" onclick="return confirm('Haluatko varmasti poistaa?')" >Poista</a></button></td>
                 <td><button><a href="/edit_entry/book/{{book.id}}" style="color:aliceblue">Muokkaa</a></button></td>
             </tr>
             {% endfor %}
