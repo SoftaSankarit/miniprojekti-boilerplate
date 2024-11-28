@@ -1,4 +1,4 @@
-Toinen version 0.1 (28.11.)
+**Toinen version 0.1 (Julkaistu 28.11.)**
 
 
 Uudet ominaisuudet:
@@ -10,5 +10,5 @@ Uudet ominaisuudet:
 Muuta:
 - Sivuston ulkonäköä päivitetty
 
-Ensimmäinen versio 0.0 (21.11.)
+**Ensimmäinen versio 0.0 (Julkaistu 21.11.)**
 - Lisää book-muotoinen viite
