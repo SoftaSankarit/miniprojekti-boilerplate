@@ -1,4 +1,6 @@
 Toinen version 0.1 (28.11.)
+
+
 Uudet ominaisuudet:
 - Käyttäjä voi luoda viitteistä Bibtex-tiedoston
 - Käyttäjä voi muokata viitteitä
