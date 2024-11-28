@@ -49,7 +49,7 @@ After editing book values change
     Click Button  Lisää
     Click Link  Muokkaa
     Input Text  year  2019
-    Click Button  Muokkaa
+    Click Button  Tallenna muutokset
     Page Should Contain  Tekijät
     Page Should Contain  Teoksen nimi
     Page Should Contain  Kustantaja
