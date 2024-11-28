@@ -11,11 +11,18 @@ def get_book_by_id(id):
     return Book.query.get(id)
 
 # Luo uuden kirjan
-def create_book(author, title, publisher, year):
+def create_book(author, title, publisher, year, volume, series, address, edition, month, note, key, url):
     new_book = Book(author=author,
                     title=title,
                     publisher=publisher,
                     year=year) 
+    
+    # Lisää kaikki valinnaiset jos eivät ole tyhjiä
+    optionals = (volume, series, address, edition, month, note, key, url)
+    for field, value in optionals:
+        if value:
+            setattr(new_book, field, value)
+
     db.session.add(new_book)
     db.session.commit()
 

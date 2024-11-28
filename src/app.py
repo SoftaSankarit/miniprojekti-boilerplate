@@ -24,7 +24,17 @@ def book_creation():
     title = request.form.get("title").strip()
     publisher = request.form.get("publisher").strip()
     year = request.form.get("year")
-    create_book(author, title, publisher, year)
+
+    volume = request.form.get("volume")
+    series = request.form.get("series")
+    address = request.form.get("address")
+    edition = request.form.get("edition")
+    month = request.form.get("month")
+    note = request.form.get("note")
+    key = request.form.get("key")
+    url = request.form.get("url")
+
+    create_book(author, title, publisher, year, volume, series, address, edition, month, note, key, url)
     return redirect("/")
 
 # Luo txt-muotoisen tiedoston, jossa ovat kaikki kirjat BibTeX muodossa
