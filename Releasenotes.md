@@ -3,6 +3,8 @@ Uudet ominaisuudet:
 - Käyttäjä voi luoda viitteistä Bibtex-tiedoston
 - Käyttäjä voi muokata viitteitä
 - Käyttäjä voi poistaa viitteistä
+
+  
 Muuta:
 - Sivuston ulkonäköä päivitetty
 
