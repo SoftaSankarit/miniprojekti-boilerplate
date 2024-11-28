@@ -11,4 +11,4 @@ Muuta:
 - Sivuston ulkonäköä päivitetty
 
 **Ensimmäinen versio 0.0 (Julkaistu 21.11.2024)**
-- Lisää book-muotoinen viite
+- Käyttäjä voi lisätä book-muotoisen viitteen tietokantaan
