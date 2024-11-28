@@ -36,6 +36,7 @@ After deleting a book, there are none
     Input Text  year  2024
     Click Button  Lisää
     Click Link  Poista
+    Handle Alert  ACCEPT    
     Page Should Contain  Ei kirjoja tietokannassa.
 
 After editing book values change
