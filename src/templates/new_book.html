@@ -6,8 +6,9 @@ Viitesovellus
 
 {% block body %}
 
+{% if is_edit: %}
+
 <div class="form-container">
-  {% if is_edit: %}
   <form method="POST" action='/edit_entry/book/{{ book.id }}' id="editForm">
     <div class="form-group">
       <label for="author">Tekijät:</label>
@@ -27,28 +28,10 @@ Viitesovellus
     </div>
     <button type="submit">Tallenna muutokset</button>
   </form>
-<<<<<<< HEAD
 </div>
-
-
 {% else %}
-
 <div class="form-container">
     <form method="POST" action="create_book" id="bookForm">
-    {% with messages = get_flashed_messages() %}
-      {% if messages %}
-      <ul>
-        {% for message in messages %}
-          <li>{{ message }}</li>
-        {% endfor %}
-      </ul>
-      {% endif %}
-    {% endwith %}
-  
-=======
-  {% else %}
-  <form method="POST" action="create_book" id="bookForm">
->>>>>>> htmlsiistiminen
       <div class="form-group">
         <label for="author">Tekijät:</label>
         <input type="text" id="author" name="author" required>
@@ -67,13 +50,9 @@ Viitesovellus
       </div>
       <button type="submit">Lisää</button>
     </form>
-    {% endif %}
-</div>
-<br>
-<p>
-  <button>
-    <a href="/" style="color:aliceblue">Lista kirjoista</a>
-  </button>
-</p>
+  </div>
+{% endif %}
+<br></b>
+<p><button><a href="/" style="color:aliceblue">Lista kirjoista</a></button></p>
 
 {% endblock %}
