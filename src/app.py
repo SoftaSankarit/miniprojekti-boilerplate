@@ -1,17 +1,17 @@
 import io
-from flask import redirect, render_template, request, jsonify, send_file
+from flask import redirect, render_template, request, jsonify, send_file, flash
 from bibtexparser.bwriter import BibTexWriter
 from bibtexparser.bibdatabase import BibDatabase
 from db_helper import reset_db
 from repositories.book_repository \
     import get_books, get_book_by_id, create_book, delete_book, edit_book
 from config import app, test_env
+from util import validate_year
 
 # Lataa nykyiset kirjat alkunäytölle
 @app.route("/")
 def index():
     books = get_books()
-    print(books)
     return render_template("index.html", books=books)
 
 @app.route("/new_book")
@@ -21,12 +21,17 @@ def new_book():
 # Luo kirjan databaseen riippuen syötteistä
 @app.route("/create_book", methods=["GET","POST"])
 def book_creation():
-    author = request.form.get("author").strip()
-    title = request.form.get("title").strip()
-    publisher = request.form.get("publisher").strip()
-    year = request.form.get("year")
-    create_book(author, title, publisher, year)
-    return redirect("/")
+    try:
+        author = request.form.get("author").strip()
+        title = request.form.get("title").strip()
+        publisher = request.form.get("publisher").strip()
+        year = request.form.get("year")
+        validate_year(year=year)
+        create_book(author, title, publisher, year)
+        return redirect("/")
+    except Exception as error:
+        flash(str(error))
+        return redirect("/new_book")
 
 # Luo txt-muotoisen tiedoston, jossa ovat kaikki kirjat BibTeX muodossa
 @app.route("/generate_bibtex")
@@ -82,7 +87,6 @@ def edit_entry(entry_type,entry_id):
             publisher = request.form.get("publisher").strip()
             year = request.form.get("year")
             edit_book(id=entry_id, author=author, title=title, publisher=publisher, year=year)
-            print(book.id)
             return redirect("/")
     return redirect("/")
 

@@ -42,6 +42,15 @@ Viitesovellus
 
 <div class="form-container">
     <form method="POST" action="create_book" id="bookForm">
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+      <ul>
+        {% for message in messages %}
+          <li>{{ message }}</li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+    {% endwith %}
   
       <div class="form-group">
         <label for="author">Tekijät:</label>
