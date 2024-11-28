@@ -1,4 +1,4 @@
-Toinen version 0.1 (viikko2)
+Toinen version 0.1 (28.11.)
 Uudet ominaisuudet:
 - Käyttäjä voi luoda viitteistä Bibtex-tiedoston
 - Käyttäjä voi muokata viitteitä
@@ -6,5 +6,5 @@ Uudet ominaisuudet:
 Muuta:
 - Sivuston ulkonäköä päivitetty
 
-Ensimmäinen versio 0.0 (viikko 1)
+Ensimmäinen versio 0.0 (21.11.)
 - Lisää book-muotoinen viite
