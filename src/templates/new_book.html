@@ -13,26 +13,26 @@ Viitesovellus
   <form method="POST" action='/edit_entry/book/{{ book.id }}' id="editForm">
 
     <div class="form-group">
-      <label for="author">Author:</label>
+      <label for="author">Tekijät:</label>
       <input type="text" id="author" name="author" value="{{ book.author }}" required>
     </div>
 
     <div class="form-group">
-      <label for="title">Title:</label>
+      <label for="title">Teoksen nimi:</label>
       <input type="text" id="title" name="title" value="{{ book.title }}" required>
     </div>
 
     <div class="form-group">
-      <label for="publisher">Publisher:</label>
+      <label for="publisher">Kustantaja:</label>
       <input type="text" id="publisher" name="publisher" value="{{ book.publisher }}" required>
     </div>
 
     <div class="form-group">
-      <label for="year">Year:</label>
+      <label for="year">Julkaisuvuosi:</label>
       <input type="number" id="year" name="year" value="{{ book.year }}" required>
     </div>
 
-    <button type="submit">Muokkaa</button>
+    <button type="submit">Tallenna muutokset</button>
 
   </form>
 </div>
@@ -68,5 +68,7 @@ Viitesovellus
     </form>
   </div>
 {% endif %}
+<br></b>
+<p><button><a href="/" style="color:aliceblue">Lista kirjoista</a></button></p>
 
 {% endblock %}

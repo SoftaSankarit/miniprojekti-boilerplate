@@ -26,7 +26,7 @@ Viitesovellus
                 <td>{{ book.title }}</td>
                 <td>{{ book.publisher }}</td>
                 <td>{{ book.year }}</td>
-                <td><button><a href="/delete_entry/book/{{book.id}}" style="color:aliceblue">Poista</a></button></td>
+                <td><button><a href="/delete_entry/book/{{book.id}}" style="color:aliceblue" onclick="return confirm('Haluatko varmasti poistaa?')" >Poista</a></button></td>
                 <td><button><a href="/edit_entry/book/{{book.id}}" style="color:aliceblue">Muokkaa</a></button></td>
             </tr>
             {% endfor %}
@@ -36,8 +36,11 @@ Viitesovellus
     <p>Ei kirjoja tietokannassa.</p>
 {% endif %}
 </div>
-<p><button><a href="/new_book" style="color:aliceblue">Lisää uusi kirja</a></button></p>
-
-<p><button><a href="/generate_bibtex" style="color: aliceblue;">Luo BibTeX-tiedosto</a></button></p>
-
+<br></br>
+<button style="display: inline-block; margin-right: 10px;">
+    <a href="/new_book" style="color:aliceblue">Lisää uusi kirja</a>
+</button>
+<button style="display: inline-block;">
+    <a href="/generate_bibtex" style="color: aliceblue;">Luo BibTeX-tiedosto</a>
+</button>
 {% endblock %}
