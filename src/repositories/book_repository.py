@@ -1,4 +1,3 @@
-from sqlalchemy import text
 from config import db
 from entities.book import Book
 
@@ -31,4 +30,3 @@ def edit_book(id, author, title, publisher, year):
     book.publisher = publisher
     book.year = year
     db.session.commit()
-    

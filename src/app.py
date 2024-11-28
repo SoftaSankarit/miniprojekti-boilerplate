@@ -1,9 +1,10 @@
+import io
 from flask import redirect, render_template, request, jsonify, send_file
 from bibtexparser.bwriter import BibTexWriter
 from bibtexparser.bibdatabase import BibDatabase
-import io
 from db_helper import reset_db
-from repositories.book_repository import get_books, get_book_by_id, create_book, delete_book, edit_book
+from repositories.book_repository \
+    import get_books, get_book_by_id, create_book, delete_book, edit_book
 from config import app, test_env
 
 # Lataa nykyiset kirjat alkunäytölle
@@ -39,7 +40,7 @@ def generate_bibtex():
         year = book.year
         book_id = author_last_name + title + str(year)
         return book_id
-    
+
     db_bib.entries = [
         {
             "ENTRYTYPE": "book",
@@ -53,14 +54,14 @@ def generate_bibtex():
     ]
     writer = BibTexWriter()
     bibtex_string = writer.write(db_bib)
-    
+
     return send_file(
         io.BytesIO(bibtex_string.encode("utf-8")),
         mimetype="tetx/plain",
         as_attachment=True,
-        download_name= "Bibtex.txt"
-    )
-#Poistaa viitteen tietokannasta 
+        download_name= "Bibtex.txt")
+
+#Poistaa viitteen tietokannasta
 @app.route("/delete_entry/<entry_type>/<entry_id>")
 def delete_entry(entry_type,entry_id):
     if entry_type == "book":
@@ -83,6 +84,7 @@ def edit_entry(entry_type,entry_id):
             edit_book(id=entry_id, author=author, title=title, publisher=publisher, year=year)
             print(book.id)
             return redirect("/")
+    return redirect("/")
 
 # testausta varten oleva reitti
 if test_env:

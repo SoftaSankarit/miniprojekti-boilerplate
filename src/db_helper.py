@@ -1,14 +1,14 @@
 from sqlalchemy import text
 from config import db, app
 
-table_name = "books"
+TABLE_NAME = "books"
 
 def table_exists(name):
     sql_table_existence = text(
       "SELECT EXISTS ("
       "  SELECT 1"
       "  FROM information_schema.tables"
-      f" WHERE table_name = '{name}'"
+      f" WHERE TABLE_NAME = '{name}'"
       ")"
     )
 
@@ -19,22 +19,22 @@ def table_exists(name):
     return result.fetchall()[0][0]
 
 def reset_db():
-    print(f"Clearing contents from table {table_name}")
-    sql = text(f"DELETE FROM {table_name}")
+    print(f"Clearing contents from table {TABLE_NAME}")
+    sql = text(f"DELETE FROM {TABLE_NAME}")
     db.session.execute(sql)
     db.session.commit()
 
 def setup_db():
-    if table_exists(table_name):
-      print(f"Table {table_name} exists, dropping")
-      sql = text(f"DROP TABLE {table_name}")
-      db.session.execute(sql)
-      db.session.commit()
+    if table_exists(TABLE_NAME):
+        print(f"Table {TABLE_NAME} exists, dropping")
+        sql = text(f"DROP TABLE {TABLE_NAME}")
+        db.session.execute(sql)
+        db.session.commit()
 
     # VARCHAR(100) laittaa maksimi pituuden ja NOT NULL kieltää sen olemast tyhjä
-    print(f"Creating table {table_name}")
+    print(f"Creating table {TABLE_NAME}")
     sql = text(
-        f"CREATE TABLE {table_name} ("
+        f"CREATE TABLE {TABLE_NAME} ("
         "  id SERIAL PRIMARY KEY, "
         "  author VARCHAR(100) NOT NULL, "
         "  title VARCHAR(100) NOT NULL, "
