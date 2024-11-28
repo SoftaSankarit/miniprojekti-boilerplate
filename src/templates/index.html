@@ -26,6 +26,49 @@ Viitesovellus
                 <td>{{ book.title }}</td>
                 <td>{{ book.publisher }}</td>
                 <td>{{ book.year }}</td>
+                <td>
+                    <button onclick="toggleDetails('details-{{ book.id }}')">
+                        Näytä/Piilota lisätiedot
+                    </button>
+                    <div id="details-{{ book.id }}" style="display: none; margin-top: 10px;">
+                        {% set has_details = false %}
+                        {% if book.volume %}
+                            <p>Volyymi: {{ book.volume }}</p>
+                            {% set has_details = true %}
+                        {% endif %}
+                        {% if book.series %}
+                            <p>Sarja: {{ book.series }}</p>
+                            {% set has_details = true %}
+                        {% endif %}
+                        {% if book.address %}
+                            <p>Osoite: {{ book.address }}</p>
+                            {% set has_details = true %}
+                        {% endif %}
+                        {% if book.edition %}
+                            <p>Painos: {{ book.edition }}</p>
+                            {% set has_details = true %}
+                        {% endif %}
+                        {% if book.month %}
+                            <p>Kuukausi: {{ book.month }}</p>
+                            {% set has_details = true %}
+                        {% endif %}
+                        {% if book.note %}
+                            <p>Muistiinpano: {{ book.note }}</p>
+                            {% set has_details = true %}
+                        {% endif %}
+                        {% if book.key %}
+                            <p>Avain: {{ book.key }}</p>
+                            {% set has_details = true %}
+                        {% endif %}
+                        {% if book.url %}
+                            <p>URL: <a href="{{ book.url }}" target="_blank">{{ book.url }}</a></p>
+                            {% set has_details = true %}
+                        {% endif %}
+                        {% if not has_details %}
+                            <p>Ei lisätietoja.</p>
+                        {% endif %}
+                    </div>
+                </td>
                 <td><button><a href="/delete_entry/book/{{book.id}}" style="color:aliceblue" onclick="return confirm('Haluatko varmasti poistaa?')" >Poista</a></button></td>
                 <td><button><a href="/edit_entry/book/{{book.id}}" style="color:aliceblue">Muokkaa</a></button></td>
             </tr>
@@ -43,4 +86,17 @@ Viitesovellus
 <button style="display: inline-block;">
     <a href="/generate_bibtex" style="color: aliceblue;">Luo BibTeX-tiedosto</a>
 </button>
+
+
+<!-- Scripti joka piilottaa/näyttää lisävalinnat -->
+<script>
+    function toggleDetails(id) {
+        const details = document.getElementById(id);
+        if (details.style.display === "none") {
+            details.style.display = "block";
+        } else {
+            details.style.display = "none";
+        }
+    }
+</script>
 {% endblock %}
