@@ -1,16 +1,17 @@
-from flask import redirect, render_template, request, jsonify, send_file
-from db_helper import reset_db
-from repositories.book_repository import get_books, get_book_by_id, create_book, delete_book, edit_book
-from config import app, test_env
+import io
+from flask import redirect, render_template, request, jsonify, send_file, flash
 from bibtexparser.bwriter import BibTexWriter
 from bibtexparser.bibdatabase import BibDatabase
-import io
+from db_helper import reset_db
+from repositories.book_repository \
+    import get_books, get_book_by_id, create_book, delete_book, edit_book
+from config import app, test_env
+from util import validate_year
 
 # Lataa nykyiset kirjat alkunäytölle
 @app.route("/")
 def index():
     books = get_books()
-    print(books)
     return render_template("index.html", books=books)
 
 @app.route("/new_book")
@@ -20,21 +21,17 @@ def new_book():
 # Luo kirjan databaseen riippuen syötteistä
 @app.route("/create_book", methods=["GET","POST"])
 def book_creation():
-    author = request.form.get("author").strip()
-    title = request.form.get("title").strip()
-    publisher = request.form.get("publisher").strip()
-    year = request.form.get("year")
-
-    all_options = ("volume", "series", "address", "edition", "month", "note", "key", "url")
-    optionals = {}
-    for i in all_options:
-        test = request.form.get(i)
-        if test is not None:
-            optionals[i] = test
-
-
-    create_book(author, title, publisher, year, optionals)
-    return redirect("/")
+    try:
+        author = request.form.get("author").strip()
+        title = request.form.get("title").strip()
+        publisher = request.form.get("publisher").strip()
+        year = request.form.get("year")
+        validate_year(year=year)
+        create_book(author, title, publisher, year)
+        return redirect("/")
+    except Exception as error:
+        flash(str(error))
+        return redirect("/new_book")
 
 # Luo txt-muotoisen tiedoston, jossa ovat kaikki kirjat BibTeX muodossa
 @app.route("/generate_bibtex")
@@ -48,7 +45,7 @@ def generate_bibtex():
         year = book.year
         book_id = author_last_name + title + str(year)
         return book_id
-    
+
     db_bib.entries = [
         {
             "ENTRYTYPE": "book",
@@ -62,14 +59,14 @@ def generate_bibtex():
     ]
     writer = BibTexWriter()
     bibtex_string = writer.write(db_bib)
-    
+
     return send_file(
         io.BytesIO(bibtex_string.encode("utf-8")),
         mimetype="tetx/plain",
         as_attachment=True,
-        download_name= "Bibtex.txt"
-    )
-#Poistaa viitteen tietokannasta 
+        download_name= "Bibtex.txt")
+
+#Poistaa viitteen tietokannasta
 @app.route("/delete_entry/<entry_type>/<entry_id>")
 def delete_entry(entry_type,entry_id):
     if entry_type == "book":
@@ -90,8 +87,8 @@ def edit_entry(entry_type,entry_id):
             publisher = request.form.get("publisher").strip()
             year = request.form.get("year")
             edit_book(id=entry_id, author=author, title=title, publisher=publisher, year=year)
-            print(book.id)
             return redirect("/")
+    return redirect("/")
 
 # testausta varten oleva reitti
 if test_env:
