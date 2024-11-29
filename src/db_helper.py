@@ -39,7 +39,16 @@ def setup_db():
         "  author VARCHAR(100) NOT NULL, "
         "  title VARCHAR(100) NOT NULL, "
         "  publisher VARCHAR(100) NOT NULL, "
-        "  year INTEGER NOT NULL"
+        "  year INTEGER NOT NULL,  "
+    
+        "  volume VARCHAR(100), "
+        "  series VARCHAR(100), "
+        "  address VARCHAR(100), "
+        "  edition VARCHAR(100), "
+        "  month VARCHAR(100), "
+        "  note TEXT, "
+        "  key VARCHAR(100), "
+        "  url VARCHAR(100)"
         ")"
     )
 
