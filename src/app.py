@@ -61,6 +61,11 @@ def generate_bibtex():
             "title": book.title,
             "year": str(book.year),
             "publisher": book.publisher,
+        **{
+            field: getattr(book, field)
+            for field in ["volume", "series", "address", "edition", "month", "note", "key", "url"]
+            if getattr(book, field) is not None
+        },
         }
         for book in books
     ]
