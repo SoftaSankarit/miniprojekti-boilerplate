@@ -27,6 +27,13 @@ def book_creation():
         publisher = request.form.get("publisher").strip()
         year = request.form.get("year")
         validate_year(year=year)
+        # Tarkistaa onko valinnainen syöte täytetty ja lisää annetut lisävalinnat
+        all_options = ("volume", "series", "address", "edition", "month", "note", "key", "url")
+        optionals = {}
+        for i in all_options:
+            test = request.form.get(i)
+            if test is not None:
+                optionals[i] = test
         create_book(author, title, publisher, year)
         return redirect("/")
     except Exception as error:
