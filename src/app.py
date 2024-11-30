@@ -34,7 +34,7 @@ def book_creation():
             test = request.form.get(i)
             if test is not None:
                 optionals[i] = test
-        create_book(author, title, publisher, year)
+        create_book(author, title, publisher, year, optionals)
         return redirect("/")
     except Exception as error:
         flash(str(error))
