@@ -98,7 +98,13 @@ def edit_entry(entry_type,entry_id):
             title = request.form.get("title").strip()
             publisher = request.form.get("publisher").strip()
             year = request.form.get("year")
-            edit_book(id=entry_id, author=author, title=title, publisher=publisher, year=year)
+            all_options = ("volume", "series", "address", "edition", "month", "note", "key", "url")
+            optionals = {}
+            for i in all_options:
+                test = request.form.get(i)
+                if test is not None:
+                    optionals[i] = test
+            edit_book(id=entry_id, author=author, title=title, publisher=publisher, year=year, optionals=optionals)
             return redirect("/")
     return redirect("/")
 

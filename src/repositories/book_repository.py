@@ -26,11 +26,14 @@ def delete_book(id):
     Book.query.filter_by(id=id).delete()
     db.session.commit()
 
-def edit_book(id, author, title, publisher, year):
+def edit_book(id, author, title, publisher, year, optionals):
     book = get_book_by_id(id)
     book.id = id
     book.author = author
     book.title = title
     book.publisher = publisher
     book.year = year
+    for field, value in optionals.items():
+        if value:
+            setattr(book, field, value)
     db.session.commit()
