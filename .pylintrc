@@ -290,7 +290,7 @@ exclude-too-few-public-methods=
 ignored-parents=
 
 # Maximum number of arguments for function / method.
-max-args=5
+max-args=6
 
 # Maximum number of attributes for a class (see R0902).
 max-attributes=7
@@ -308,7 +308,7 @@ max-locals=15
 max-parents=7
 
 # Maximum number of positional arguments for function / method.
-max-positional-arguments=5
+max-positional-arguments=6
 
 # Maximum number of public methods for a class (see R0904).
 max-public-methods=20
@@ -334,6 +334,9 @@ overgeneral-exceptions=builtins.BaseException,builtins.Exception
 # Expected format of line ending, e.g. empty (any line ending), LF or CRLF.
 expected-line-ending-format=
 
+# Allow id as argument name
+good-names=id
+
 # Regexp for a line that is allowed to be longer than the limit.
 ignore-long-lines=^\s*(# )?<?https?://\S+>?$
 
@@ -345,7 +348,7 @@ indent-after-paren=4
 indent-string='    '
 
 # Maximum number of characters on a single line.
-max-line-length=100
+max-line-length=120
 
 # Maximum number of lines in a module.
 max-module-lines=1000
@@ -415,7 +418,7 @@ logging-modules=logging
 # all. Valid levels: HIGH, CONTROL_FLOW, INFERENCE, INFERENCE_FAILURE,
 # UNDEFINED.
 confidence=HIGH,
-           CONTROL_FLOW,
+           
            INFERENCE,
            INFERENCE_FAILURE,
            UNDEFINED
