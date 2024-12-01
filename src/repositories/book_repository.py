@@ -26,7 +26,7 @@ def delete_book(id):
     Book.query.filter_by(id=id).delete()
     db.session.commit()
 
-def edit_book(id, author, title, publisher, year, optionals):
+def edit_book(id, author, title, publisher, year, optionals): # pylint: disable=too-many-arguments, too-many-positional-arguments
     book = get_book_by_id(id)
     book.id = id
     book.author = author
