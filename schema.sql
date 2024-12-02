@@ -1,6 +1,7 @@
 -- Luo reference-taulu
 CREATE TABLE reference (
     id SERIAL PRIMARY KEY,
+    type VARCHAR(100),
     title VARCHAR(255) NOT NULL,
     author VARCHAR(100),
     year INT,
