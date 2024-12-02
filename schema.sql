@@ -1,13 +1,6 @@
--- Luo type-taulu
-CREATE TABLE type (
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(100) NOT NULL UNIQUE
-);
-
 -- Luo reference-taulu
 CREATE TABLE reference (
     id SERIAL PRIMARY KEY,
-    type_id INT NOT NULL,
     title VARCHAR(255) NOT NULL,
     author VARCHAR(100),
     year INT,
@@ -30,23 +23,5 @@ CREATE TABLE reference (
     note TEXT, 
     misc_details TEXT,
     doi VARCHAR(150),
-    address VARCHAR(200),
-    FOREIGN KEY (type_id) REFERENCES type (id)
+    address VARCHAR(200)
 );
-
--- Lisää aloitustiedot type-tauluun
-INSERT INTO type (name) VALUES
-('article')
--- ('book'),
--- ('booklet'),
--- ('conference'),
--- ('inbook'),
--- ('incollection'),
--- ('inproceedings'),
--- ('manual'),
--- ('mastersthesis'),
--- ('misc'),
--- ('phdthesis'),
--- ('proceedings'),
--- ('techreport'),
--- ('unpublished')

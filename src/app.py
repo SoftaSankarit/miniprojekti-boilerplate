@@ -11,15 +11,15 @@ from util import validate_year
 # Lataa nykyiset kirjat alkunäytölle
 @app.route("/")
 def index():
-    books = get_references()
-    return render_template("index.html", books=books)
+    references = get_references()
+    return render_template("index.html", references=references)
 
 @app.route("/new_reference")
 def new_book():
     return render_template("new_reference.html")
 
 # Luo kirjan databaseen riippuen syötteistä
-@app.route("/create_book", methods=["GET","POST"])
+@app.route("/create_reference", methods=["GET","POST"])
 def book_creation():
     try:
         author = request.form.get("author").strip()
@@ -38,7 +38,7 @@ def book_creation():
         return redirect("/")
     except Exception as error:
         flash(str(error))
-        return redirect("/new_book")
+        return redirect("/new_reference")
 
 # Luo txt-muotoisen tiedoston, jossa ovat kaikki kirjat BibTeX muodossa
 @app.route("/generate_bibtex")
