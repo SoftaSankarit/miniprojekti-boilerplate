@@ -69,8 +69,8 @@ Viitesovellus
                         {% endif %}
                     </div>
                 </td>
-                <td><button><a href="/delete_entry/reference/{{reference.id}}" style="color:aliceblue" onclick="return confirm('Haluatko varmasti poistaa?')" >Poista</a></button></td>
                 <td><button><a href="/edit_entry/reference/{{reference.id}}" style="color:aliceblue">Muokkaa</a></button></td>
+                <td><button><a href="/delete_entry/reference/{{reference.id}}" style="color:aliceblue" onclick="return confirm('Haluatko varmasti poistaa?')" >Poista</a></button></td>
             </tr>
             {% endfor %}
         </tbody>
@@ -81,7 +81,7 @@ Viitesovellus
 </div>
 <br></br>
 <button style="display: inline-block; margin-right: 10px;">
-    <a href="/new_reference" style="color:aliceblue">Lisää uusi kirja</a>
+    <a href="/new_reference" style="color:aliceblue">Lisää uusi viite</a>
 </button>
 <button style="display: inline-block;">
     <a href="/generate_bibtex" style="color: aliceblue;">Luo BibTeX-tiedosto</a>
