@@ -90,7 +90,7 @@ def delete_entry(entry_type,entry_id):
 def edit_entry(entry_type,entry_id):
     reference = get_reference_by_id(entry_id)
     if request.method == "GET":
-        return render_template("new_reference.html", reference=reference, is_edit=True)
+        return render_template("edit_reference.html", reference=reference, is_edit=True)
     if request.method == "POST":
         author = request.form.get("author").strip()
         title = request.form.get("title").strip()
