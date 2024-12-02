@@ -1,6 +1,5 @@
 from config import db
-from models.reference import Reference
-from models.type import Type
+from entities.reference import Reference
 
 # Hakee kaikki viitteet ja niiden tiedot
 def get_references():
@@ -14,7 +13,7 @@ def get_reference_by_id(id):  # pylint: disable=invalid-name
 # Luo uuden viitteen
 def create_reference(type_name, title, author=None, year=None, optionals={}):
     # Hae viitteen tyyppi type-taulusta
-    ref_type = Type.query.filter_by(name=type_name).first()
+    ref_type = Reference.query.filter_by(name=type).first()
     if not ref_type:
         raise ValueError(f"Viitteen tyyppiä '{type_name}' ei löytynyt.")
 
@@ -44,7 +43,7 @@ def edit_reference(id, type_name, title, author=None, year=None, optionals={}): 
         raise ValueError(f"Viitettä id:llä '{id}' ei löytynyt.")
 
     # Päivitä tyyppi
-    ref_type = Type.query.filter_by(name=type_name).first()
+    ref_type = Reference.query.filter_by(name=type).first()
     if not ref_type:
         raise ValueError(f"Viitteen tyyppiä '{type_name}' ei löytynyt.")
     ref.type_id = ref_type.id

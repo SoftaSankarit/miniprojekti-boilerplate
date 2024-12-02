@@ -50,19 +50,3 @@ CREATE TABLE reference (
     doi VARCHAR(150),
     FOREIGN KEY (type_id) REFERENCES type (id)
 );
-
-INSERT INTO type (name) VALUES
-('article'),
-('book'),
-('booklet'),
-('conference'),
-('inbook'),
-('incollection'),
-('inproceedings'),
-('manual'),
-('mastersthesis'),
-('misc'),
-('phdthesis'),
-('proceedings'),
-('techreport'),
-('unpublished');
