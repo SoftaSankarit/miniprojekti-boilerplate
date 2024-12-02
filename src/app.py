@@ -3,8 +3,8 @@ from flask import redirect, render_template, request, jsonify, send_file, flash
 from bibtexparser.bwriter import BibTexWriter
 from bibtexparser.bibdatabase import BibDatabase
 from db_helper import reset_db
-from repositories.book_repository \
-    import get_references, get_book_by_id, create_reference, delete_book, edit_book
+from repositories.reference_repository \
+    import get_references, get_reference_by_id, create_reference, delete_reference, edit_reference
 from config import app, test_env
 from util import validate_year
 
@@ -15,12 +15,12 @@ def index():
     return render_template("index.html", references=references)
 
 @app.route("/new_reference")
-def new_book():
+def new_reference():
     return render_template("new_reference.html")
 
 # Luo kirjan databaseen riippuen syötteistä
 @app.route("/create_reference", methods=["GET","POST"])
-def book_creation():
+def reference_creation():
     try:
         author = request.form.get("author").strip()
         title = request.form.get("title").strip()
@@ -43,31 +43,31 @@ def book_creation():
 # Luo txt-muotoisen tiedoston, jossa ovat kaikki kirjat BibTeX muodossa
 @app.route("/generate_bibtex")
 def generate_bibtex():
-    books = get_references()
+    references = get_references()
     db_bib = BibDatabase()
 
-    def generate_book_id(book):
-        author_last_name = book.author.split(" ")[-1]
-        title = book.title.split(" ")[0]
-        year = book.year
-        book_id = author_last_name + title + str(year)
-        return book_id
+    def generate_book_id(reference):
+        author_last_name = reference.author.split(" ")[-1]
+        title = reference.title.split(" ")[0]
+        year = reference.year
+        reference_id = author_last_name + title + str(year)
+        return reference_id
 
     db_bib.entries = [
         {
             "ENTRYTYPE": "book",
-            "ID": generate_book_id(book),
-            "author": book.author,
-            "title": book.title,
-            "year": str(book.year),
-            "publisher": book.publisher,
+            "ID": generate_book_id(reference),
+            "author": reference.author,
+            "title": reference.title,
+            "year": str(reference.year),
+            "publisher": reference.publisher,
         **{
-            field: getattr(book, field)
+            field: getattr(reference, field)
             for field in ["volume", "series", "address", "edition", "month", "note", "key", "url"]
-            if getattr(book, field) is not None
+            if getattr(reference, field) is not None
         },
         }
-        for book in books
+        for reference in references
     ]
     writer = BibTexWriter()
     bibtex_string = writer.write(db_bib)
@@ -81,31 +81,29 @@ def generate_bibtex():
 #Poistaa viitteen tietokannasta
 @app.route("/delete_entry/<entry_type>/<entry_id>")
 def delete_entry(entry_type,entry_id):
-    if entry_type == "book":
-        delete_book(entry_id)
+    delete_reference(entry_id)
     return redirect("/")
 
 
 #Muokkaa viitettä
 @app.route("/edit_entry/<entry_type>/<entry_id>", methods=["GET", "POST"])
 def edit_entry(entry_type,entry_id):
-    if entry_type == "book":
-        book = get_book_by_id(entry_id)
-        if request.method == "GET":
-            return render_template("new_book.html", book=book, is_edit=True)
-        if request.method == "POST":
-            author = request.form.get("author").strip()
-            title = request.form.get("title").strip()
-            publisher = request.form.get("publisher").strip()
-            year = request.form.get("year")
-            all_options = ("volume", "series", "address", "edition", "month", "note", "key", "url")
-            optionals = {}
-            for i in all_options:
-                test = request.form.get(i)
-                if test is not None:
-                    optionals[i] = test
-            edit_book(id=entry_id, author=author, title=title, publisher=publisher, year=year, optionals=optionals)
-            return redirect("/")
+    reference = get_reference_by_id(entry_id)
+    if request.method == "GET":
+        return render_template("new_reference.html", reference=reference, is_edit=True)
+    if request.method == "POST":
+        author = request.form.get("author").strip()
+        title = request.form.get("title").strip()
+        publisher = request.form.get("publisher").strip()
+        year = request.form.get("year")
+        all_options = ("volume", "series", "address", "edition", "month", "note", "key", "url")
+        optionals = {}
+        for i in all_options:
+            test = request.form.get(i)
+            if test is not None:
+                optionals[i] = test
+        edit_reference(id=entry_id, author=author, title=title, publisher=publisher, year=year, optionals=optionals)
+        return redirect("/")
     return redirect("/")
 
 # testausta varten oleva reitti
