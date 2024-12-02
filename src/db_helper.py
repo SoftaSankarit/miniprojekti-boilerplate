@@ -13,8 +13,10 @@ def execute_sql_file(file_path):
 
 def reset_db():
     print("Resetting database...")
-    sql = text("TRUNCATE TABLE reference CASCADE")
+    sql = text("DROP TABLE reference CASCADE")
+    sql_type = text("DROP TABLE IF EXISTS type CASCADE;")
     db.session.execute(sql)
+    db.session.execute(sql_type)
     db.session.commit()
 
 def setup_db():
@@ -23,4 +25,5 @@ def setup_db():
 
 if __name__ == "__main__":
     with app.app_context():
+        reset_db()
         setup_db()
