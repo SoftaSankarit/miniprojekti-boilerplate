@@ -1,10 +1,28 @@
-
-
-CREATE TABLE type (
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(50) NOT NULL
+-- ENUM-tyypin määrittely BibTeX-viitetyypeille
+CREATE TYPE bibtex_type AS ENUM (
+    'article',
+    'book',
+    'booklet',
+    'conference',
+    'inbook',
+    'incollection',
+    'inproceedings',
+    'manual',
+    'mastersthesis',
+    'misc',
+    'phdthesis',
+    'proceedings',
+    'techreport',
+    'unpublished'
 );
 
+-- TYPE-taulu
+CREATE TABLE type (
+    id SERIAL PRIMARY KEY,
+    name bibtex_type NOT NULL UNIQUE
+);
+
+-- REFERENCE-taulu
 CREATE TABLE reference (
     id SERIAL PRIMARY KEY,
     type_id INT NOT NULL,
@@ -34,17 +52,17 @@ CREATE TABLE reference (
 );
 
 INSERT INTO type (name) VALUES
-('Book'),
-('Article'),
-('Misc'),
-('ConferencePaper'),
-('Thesis'),
-('Report'),
-('Webpage'),
-('Patent'),
-('Software'),
-('Standard'),
-('Dataset'),
-('Manual'),
-('Presentation'),
-('Encyclopedia');
+('article'),
+('book'),
+('booklet'),
+('conference'),
+('inbook'),
+('incollection'),
+('inproceedings'),
+('manual'),
+('mastersthesis'),
+('misc'),
+('phdthesis'),
+('proceedings'),
+('techreport'),
+('unpublished');
