@@ -41,3 +41,4 @@ Käynnistä sovellus komennolla:
 ```
 python3 src/index.py
 ```
+

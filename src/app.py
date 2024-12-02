@@ -28,9 +28,9 @@ def book_creation():
         year = request.form.get("year")
         validate_year(year=year)
         # Tarkistaa onko valinnainen syöte täytetty ja lisää annetut lisävalinnat
-        all_options = ("volume", "series", "address", "edition", "month", "note", "key", "url")
+        all_fields = ("volume", "series", "address", "edition", "month", "note", "key", "url")
         optionals = {}
-        for i in all_options:
+        for i in all_fields:
             test = request.form.get(i)
             if test is not None:
                 optionals[i] = test
@@ -98,9 +98,9 @@ def edit_entry(entry_type,entry_id):
             title = request.form.get("title").strip()
             publisher = request.form.get("publisher").strip()
             year = request.form.get("year")
-            all_options = ("volume", "series", "address", "edition", "month", "note", "key", "url")
+            all_fields = ("volume", "series", "address", "edition", "month", "note", "key", "url")
             optionals = {}
-            for i in all_options:
+            for i in all_fields:
                 test = request.form.get(i)
                 if test is not None:
                     optionals[i] = test
