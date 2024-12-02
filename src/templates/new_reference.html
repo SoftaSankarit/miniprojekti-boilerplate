@@ -6,66 +6,6 @@ Viitesovellus
 
 {% block body %}
 
-{% if is_edit: %}
-
-<div class="form-container">
-  <form method="POST" action='/edit_entry/reference/{{ reference.id }}' id="editForm">
-    <div class="form-group">
-      <label for="author">Tekijät:</label>
-      <input type="text" id="author" name="author" value="{{ reference.author }}" placeholder="Pakollinen tieto" required>
-    </div>
-    <div class="form-group">
-      <label for="title">Teoksen nimi:</label>
-      <input type="text" id="title" name="title" value="{{ reference.title }}" placeholder="Pakollinen tieto" required>
-    </div>
-    <div class="form-group">
-      <label for="publisher">Kustantaja:</label>
-      <input type="text" id="publisher" name="publisher" value="{{ reference.publisher }}" placeholder="Pakollinen tieto" required>
-    </div>
-    <div class="form-group">
-      <label for="year">Julkaisuvuosi:</label>
-      <input type="number" id="year" name="year" value="{{ reference.year }}" placeholder="Pakollinen tieto" required>
-    </div>
-    <!-- Alussa valinnat piilossa -->
-    <div id="optionalFields" style="display: none;">
-      <div class="form-group">
-          <label for="volume">Volyymi:</label>
-          <input type="text" id="volume" name="volume" placeholder="Valinnainen tieto">
-      </div>
-      <div class="form-group">
-          <label for="series">Sarja:</label>
-          <input type="text" id="series" name="series" placeholder="Valinnainen tieto">
-      </div>
-      <div class="form-group">
-          <label for="address">Osoite:</label>
-          <input type="text" id="address" name="address" placeholder="Valinnainen tieto">
-      </div>
-      <div class="form-group">
-          <label for="edition">Painos:</label>
-          <input type="text" id="edition" name="edition" placeholder="Valinnainen tieto">
-      </div>
-      <div class="form-group">
-          <label for="month">Kuukausi:</label>
-          <input type="text" id="month" name="month" placeholder="Valinnainen tieto">
-      </div>
-      <div class="form-group">
-          <label for="note">Muistiinpano:</label>
-          <textarea id="note" name="note" rows="4" placeholder="Valinnainen tieto"></textarea>
-      </div>
-      <div class="form-group">
-          <label for="key">Avain:</label>
-          <input type="text" id="key" name="key" placeholder="Valinnainen tieto">
-      </div>
-      <div class="form-group">
-          <label for="url">URL:</label>
-          <input type="url" id="url" name="url" placeholder="Valinnainen tieto">
-      </div>
-    </div>
-    <button type="button" id="toggleOptionalFields">Näytä lisäkentät</button>
-    <button type="submit">Tallenna muutokset</button>
-  </form>
-</div>
-{% else %}
 <div class="form-container">
     <form method="POST" action="create_reference" id="referenceForm">
       <div class="form-group">
@@ -124,7 +64,6 @@ Viitesovellus
       <button type="submit">Lisää</button>
     </form>
   </div>
-{% endif %}
 <br></b>
 <p><button><a href="/" style="color:aliceblue">Lista kirjoista</a></button></p>
 
