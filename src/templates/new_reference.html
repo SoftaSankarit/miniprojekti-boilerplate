@@ -9,22 +9,22 @@ Viitesovellus
 {% if is_edit: %}
 
 <div class="form-container">
-  <form method="POST" action='/edit_entry/book/{{ book.id }}' id="editForm">
+  <form method="POST" action='/edit_entry/reference/{{ reference.id }}' id="editForm">
     <div class="form-group">
       <label for="author">Tekijät:</label>
-      <input type="text" id="author" name="author" value="{{ book.author }}" placeholder="Pakollinen tieto" required>
+      <input type="text" id="author" name="author" value="{{ reference.author }}" placeholder="Pakollinen tieto" required>
     </div>
     <div class="form-group">
       <label for="title">Teoksen nimi:</label>
-      <input type="text" id="title" name="title" value="{{ book.title }}" placeholder="Pakollinen tieto" required>
+      <input type="text" id="title" name="title" value="{{ reference.title }}" placeholder="Pakollinen tieto" required>
     </div>
     <div class="form-group">
       <label for="publisher">Kustantaja:</label>
-      <input type="text" id="publisher" name="publisher" value="{{ book.publisher }}" placeholder="Pakollinen tieto" required>
+      <input type="text" id="publisher" name="publisher" value="{{ reference.publisher }}" placeholder="Pakollinen tieto" required>
     </div>
     <div class="form-group">
       <label for="year">Julkaisuvuosi:</label>
-      <input type="number" id="year" name="year" value="{{ book.year }}" placeholder="Pakollinen tieto" required>
+      <input type="number" id="year" name="year" value="{{ reference.year }}" placeholder="Pakollinen tieto" required>
     </div>
     <!-- Alussa valinnat piilossa -->
     <div id="optionalFields" style="display: none;">
@@ -67,7 +67,7 @@ Viitesovellus
 </div>
 {% else %}
 <div class="form-container">
-    <form method="POST" action="create_book" id="bookForm">
+    <form method="POST" action="create_reference" id="referenceForm">
       <div class="form-group">
         <label for="author">Tekijät:</label>
         <input type="text" id="author" name="author" placeholder="Pakollinen tieto" required>

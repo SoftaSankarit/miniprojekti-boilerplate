@@ -8,7 +8,7 @@ Viitesovellus
 
 <h1>Viitteet</h1>
 <div class="custom_box">   
-{% if books %}
+{% if references %}
 <p>Kirjat:</p>
     <table>
         <thead>
@@ -20,48 +20,48 @@ Viitesovellus
             </tr>
         </thead>
         <tbody>
-            {% for book in books %}
+            {% for reference in references %}
             <tr>
-                <td>{{ book.author }}</td>
-                <td>{{ book.title }}</td>
-                <td>{{ book.publisher }}</td>
-                <td>{{ book.year }}</td>
+                <td>{{ reference.author }}</td>
+                <td>{{ reference.title }}</td>
+                <td>{{ reference.publisher }}</td>
+                <td>{{ reference.year }}</td>
                 <td>
-                    <button onclick="toggleDetails('details-{{ book.id }}')">
+                    <button onclick="toggleDetails('details-{{ reference.id }}')">
                         Näytä/Piilota lisätiedot
                     </button>
-                    <div id="details-{{ book.id }}" style="display: none; margin-top: 10px;">
+                    <div id="details-{{ reference.id }}" style="display: none; margin-top: 10px;">
                         {% set has_details = false %}
-                        {% if book.volume %}
-                            <p>Volyymi: {{ book.volume }}</p>
+                        {% if reference.volume %}
+                            <p>Volyymi: {{ reference.volume }}</p>
                             {% set has_details = true %}
                         {% endif %}
-                        {% if book.series %}
-                            <p>Sarja: {{ book.series }}</p>
+                        {% if reference.series %}
+                            <p>Sarja: {{ reference.series }}</p>
                             {% set has_details = true %}
                         {% endif %}
-                        {% if book.address %}
-                            <p>Osoite: {{ book.address }}</p>
+                        {% if reference.address %}
+                            <p>Osoite: {{ reference.address }}</p>
                             {% set has_details = true %}
                         {% endif %}
-                        {% if book.edition %}
-                            <p>Painos: {{ book.edition }}</p>
+                        {% if reference.edition %}
+                            <p>Painos: {{ reference.edition }}</p>
                             {% set has_details = true %}
                         {% endif %}
-                        {% if book.month %}
-                            <p>Kuukausi: {{ book.month }}</p>
+                        {% if reference.month %}
+                            <p>Kuukausi: {{ reference.month }}</p>
                             {% set has_details = true %}
                         {% endif %}
-                        {% if book.note %}
-                            <p>Muistiinpano: {{ book.note }}</p>
+                        {% if reference.note %}
+                            <p>Muistiinpano: {{ reference.note }}</p>
                             {% set has_details = true %}
                         {% endif %}
-                        {% if book.key %}
-                            <p>Avain: {{ book.key }}</p>
+                        {% if reference.key %}
+                            <p>Avain: {{ reference.key }}</p>
                             {% set has_details = true %}
                         {% endif %}
-                        {% if book.url %}
-                            <p>URL: <a href="{{ book.url }}" target="_blank">{{ book.url }}</a></p>
+                        {% if reference.url %}
+                            <p>URL: <a href="{{ reference.url }}" target="_blank">{{ reference.url }}</a></p>
                             {% set has_details = true %}
                         {% endif %}
                         {% if not has_details %}
@@ -69,8 +69,8 @@ Viitesovellus
                         {% endif %}
                     </div>
                 </td>
-                <td><button><a href="/delete_entry/book/{{book.id}}" style="color:aliceblue" onclick="return confirm('Haluatko varmasti poistaa?')" >Poista</a></button></td>
-                <td><button><a href="/edit_entry/book/{{book.id}}" style="color:aliceblue">Muokkaa</a></button></td>
+                <td><button><a href="/delete_entry/reference/{{reference.id}}" style="color:aliceblue" onclick="return confirm('Haluatko varmasti poistaa?')" >Poista</a></button></td>
+                <td><button><a href="/edit_entry/reference/{{reference.id}}" style="color:aliceblue">Muokkaa</a></button></td>
             </tr>
             {% endfor %}
         </tbody>
@@ -81,7 +81,7 @@ Viitesovellus
 </div>
 <br></br>
 <button style="display: inline-block; margin-right: 10px;">
-    <a href="/new_book" style="color:aliceblue">Lisää uusi kirja</a>
+    <a href="/new_reference" style="color:aliceblue">Lisää uusi kirja</a>
 </button>
 <button style="display: inline-block;">
     <a href="/generate_bibtex" style="color: aliceblue;">Luo BibTeX-tiedosto</a>

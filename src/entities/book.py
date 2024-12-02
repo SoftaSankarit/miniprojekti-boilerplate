@@ -1,8 +1,8 @@
 from config import db
 
 
-class Book(db.Model):
-    __tablename__ = "books"
+class References(db.Model):
+    __tablename__ = "reference"
     id = db.Column(db.Integer, primary_key=True)
     author = db.Column(db.String(100), nullable=False)
     title = db.Column(db.String(100), nullable=False)

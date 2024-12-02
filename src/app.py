@@ -4,19 +4,19 @@ from bibtexparser.bwriter import BibTexWriter
 from bibtexparser.bibdatabase import BibDatabase
 from db_helper import reset_db
 from repositories.book_repository \
-    import get_books, get_book_by_id, create_book, delete_book, edit_book
+    import get_references, get_book_by_id, create_reference, delete_book, edit_book
 from config import app, test_env
 from util import validate_year
 
 # Lataa nykyiset kirjat alkunäytölle
 @app.route("/")
 def index():
-    books = get_books()
+    books = get_references()
     return render_template("index.html", books=books)
 
-@app.route("/new_book")
+@app.route("/new_reference")
 def new_book():
-    return render_template("new_book.html")
+    return render_template("new_reference.html")
 
 # Luo kirjan databaseen riippuen syötteistä
 @app.route("/create_book", methods=["GET","POST"])
@@ -34,7 +34,7 @@ def book_creation():
             test = request.form.get(i)
             if test is not None:
                 optionals[i] = test
-        create_book(author, title, publisher, year, optionals)
+        create_reference(author, title, publisher, year, optionals)
         return redirect("/")
     except Exception as error:
         flash(str(error))
@@ -43,7 +43,7 @@ def book_creation():
 # Luo txt-muotoisen tiedoston, jossa ovat kaikki kirjat BibTeX muodossa
 @app.route("/generate_bibtex")
 def generate_bibtex():
-    books = get_books()
+    books = get_references()
     db_bib = BibDatabase()
 
     def generate_book_id(book):

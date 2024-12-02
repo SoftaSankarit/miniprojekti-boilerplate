@@ -7,3 +7,5 @@ output.xml
 report.html
 *.png
 venv
+.coverage
+database.db
