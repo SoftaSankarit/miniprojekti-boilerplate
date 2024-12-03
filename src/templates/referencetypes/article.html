@@ -1,0 +1,14 @@
+{% include "formfields/author.html" %}
+{% include "formfields/title.html" %}
+{% include "formfields/journal.html" %}
+{% include "formfields/year.html" %}
+
+<!-- Alussa valinnat piilossa -->
+<div id="optionalFields" style="display: none;">
+    {% include "formfields/volume.html" %}
+    {% include "formfields/pages.html" %}
+    {% include "formfields/month.html" %}
+    {% include "formfields/doi.html" %}
+    {% include "formfields/note.html" %}
+    {% include "formfields/key.html" %}
+</div>
