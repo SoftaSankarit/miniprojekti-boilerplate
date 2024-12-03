@@ -6,7 +6,7 @@ Viitesovellus
 
 
 {% block body %}
-{% include "ifmessages.html" %}
+{% include "functions/ifmessages.html" %}
 <div class="form-container">
     <form method="POST" action="create_reference" id="referenceForm">
       <div class="form-group">
@@ -111,18 +111,5 @@ Viitesovellus
 <br></b>
 <p><button><a href="/" style="color:aliceblue">Lista kirjoista</a></button></p>
 
-<script>
-  const toggleButton = document.getElementById('toggleOptionalFields');
-  const optionalFields = document.getElementById('optionalFields');
-
-  toggleButton.addEventListener('click', () => {
-      if (optionalFields.style.display === 'none') {
-          optionalFields.style.display = 'block';
-          toggleButton.textContent = 'Piilota lisäkentät';
-      } else {
-          optionalFields.style.display = 'none';
-          toggleButton.textContent = 'Näytä lisäkentät';
-      }
-  });
-</script>
+{% include "functions/add_optional.html" %}
 {% endblock %}
