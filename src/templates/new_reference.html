@@ -4,8 +4,9 @@
 Viitesovellus
 {% endblock %}
 
-{% block body %}
 
+{% block body %}
+{% include "ifmessages.html" %}
 <div class="form-container">
     <form method="POST" action="create_reference" id="referenceForm">
       <div class="form-group">
