@@ -16,8 +16,9 @@ def index():
 #Lisää uusi viite
 @app.route("/new_reference/<reference_type>")
 def new_reference(reference_type):
+    references = get_references()
     if reference_type == "book":
-        return render_template("new_reference.html")
+        return render_template("new_reference.html",reference=references)
 
 # Luo kirjan databaseen riippuen syötteistä
 @app.route("/create_reference", methods=["GET","POST"])

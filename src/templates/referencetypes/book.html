@@ -1,22 +1,17 @@
+{% include "formfields/author.html" %}
+{% include "formfields/title.html" %}
+{% include "formfields/publisher.html" %}
+{% include "formfields/year.html" %}
+<!-- Alussa valinnat piilossa -->
+<div id="optionalFields" style="display: none;">
+{% include "formfields/volume.html" %}
+{% include "formfields/series.html" %}
+{% include "formfields/address.html" %}
+{% include "formfields/edition.html" %}
+{% include "formfields/month.html" %}
+{% include "formfields/note.html" %}
+{% include "formfields/key.html" %}
+{% include "formfields/url.html" %}
+</div>
 
-<div class="form-container">
-    <form method="POST" action="create_reference" id="referenceForm">
-        {% include "formfields/author.html" %}
-        {% include "formfields/title.html" %}
-        {% include "formfields/publisher.html" %}
-        {% include "formfields/year.html" %}
-      <!-- Alussa valinnat piilossa -->
-      <div id="optionalFields" style="display: none;">
-        {% include "formfields/volume.html" %}
-        {% include "formfields/series.html" %}
-        {% include "formfields/address.html" %}
-        {% include "formfields/edition.html" %}
-        {% include "formfields/month.html" %}
-        {% include "formfields/note.html" %}
-        {% include "formfields/key.html" %}
-        {% include "formfields/url.html" %}
-    </div>
-      <button type="button" id="toggleOptionalFields">Näytä lisäkentät</button>
-      <button type="submit">Lisää</button>
-    </form>
-  </div>
+

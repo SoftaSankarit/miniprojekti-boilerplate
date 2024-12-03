@@ -8,7 +8,14 @@ Viitesovellus
 {% block body %}
 {% include "functions/ifmessages.html" %}
 
-{% include "referencetypes/book.html" %}
+<div class="form-container">
+  <form method="POST" action="create_reference" id="referenceForm">
+    {% include "referencetypes/book.html" %}
+    <button type="button" id="toggleOptionalFields">Näytä lisäkentät</button>
+    <button type="submit">Lisää</button>
+  </form>
+</div>
+
 <br></b>
 <p><button><a href="/" style="color:aliceblue">Lista Viitteistä</a></button></p>
 
