@@ -12,7 +12,7 @@ At the start there are no books
 
 After adding a book, there is one
     Go To  ${HOME_URL}
-    Click Link  Lisää uusi kirja
+    Click Link  Lisää uusi viite
     Input Text  author  Erkki Esimerkki
     Input Text  title  Otsikko
     Input Text  publisher  Julkaisija
@@ -29,7 +29,7 @@ After adding a book, there is one
 
 After deleting a book, there are none
     Go To  ${HOME_URL}
-    Click Link  Lisää uusi kirja
+    Click Link  Lisää uusi viite
     Input Text  author  Erkki Esimerkki
     Input Text  title  Otsikko
     Input Text  publisher  Julkaisija
@@ -41,7 +41,7 @@ After deleting a book, there are none
 
 After editing book values change
     Go To  ${HOME_URL}
-    Click Link  Lisää uusi kirja
+    Click Link  Lisää uusi viite
     Input Text  author  Erkki Esimerkki
     Input Text  title  Otsikko
     Input Text  publisher  Julkaisija

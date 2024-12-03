@@ -2,7 +2,7 @@ import io
 from flask import redirect, render_template, request, jsonify, send_file, flash
 from bibtexparser.bwriter import BibTexWriter
 from bibtexparser.bibdatabase import BibDatabase
-from db_helper import reset_db
+from db_helper import setup_db
 from repositories.reference_repository \
     import get_references, get_reference_by_id, create_reference, delete_reference, edit_reference
 from config import app, test_env
@@ -110,5 +110,5 @@ def edit_entry(entry_type,entry_id):
 if test_env:
     @app.route("/reset_db")
     def reset_database():
-        reset_db()
+        setup_db()
         return jsonify({ 'message': "db reset" })
