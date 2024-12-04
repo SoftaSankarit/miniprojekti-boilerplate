@@ -23,13 +23,9 @@ def delete_reference(id): # pylint: disable=invalid-name
     References.query.filter_by(id=id).delete() # pylint: disable=invalid-name
     db.session.commit()
 
-def edit_reference(id, author, title, publisher, year, optionals): # pylint: disable=invalid-name
+def edit_reference(id, optionals): # pylint: disable=invalid-name
     reference = get_reference_by_id(id) # pylint: disable=invalid-name
     reference.id = id # pylint: disable=invalid-name
-    reference.author = author
-    reference.title = title
-    reference.publisher = publisher
-    reference.year = year
     for field, value in optionals.items():
         if value:
             setattr(reference, field, value)
