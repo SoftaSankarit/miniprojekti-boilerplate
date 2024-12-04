@@ -17,6 +17,7 @@ class References(db.Model):
     journal = db.Column(db.String(100), nullable=True)
     volume = db.Column(db.String(50), nullable=True)
     number = db.Column(db.Integer, nullable=True)
+    address = db.Column(db.String(50), nullable=True)
     organization = db.Column(db.String(100), nullable=True)
     school = db.Column(db.String(100), nullable=True)
     series = db.Column(db.String(100), nullable=True)

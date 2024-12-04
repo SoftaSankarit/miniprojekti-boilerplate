@@ -24,16 +24,20 @@ def new_reference(reference_type):
 def reference_creation():
     try:
         # Tarkistaa onko valinnainen syöte täytetty ja lisää annetut lisävalinnat
-        all_options = ["address", "annote", "author", "booktitle",
-                       "email", "chapter", "crossref", "doi", "edition", 
-                       "editor", "howpublished", "institution", "journal", 
-                       "key", "month", "note", "number", "organization", 
-                       "pages", "publisher", "school", "series", "title", 
-                       "type", "volume", "year"]
+        all_options = [
+    "author", "title", "publisher", "year", "howpublished",
+    "institution", "journal", "volume", "number", "address",
+    "organization", "school", "series", "issue", "edition",
+    "chapter", "pages", "url", "key", "month",
+    "note", "misc_details", "doi"
+]
+
         optionals = {}
         for i in all_options:
             test = request.form.get(i)
             if test is not None:
+                if test.isdigit():
+                    test = str(test)
                 optionals[i] = test
         create_reference(optionals)
         return redirect("/")
@@ -51,21 +55,22 @@ def generate_bibtex():
         author_last_name = reference.author.split(" ")[-1]
         title = reference.title.split(" ")[0]
         year = reference.year
-        reference_id = author_last_name + title + str(year)
+        reference_id = author_last_name + title + year
         return reference_id
 
     db_bib.entries = [
         {
-            "ENTRYTYPE": reference.type,
+            "ENTRYTYPE": "book",
             "ID": generate_book_id(reference),
         **{
             field: getattr(reference, field)
-            for field in ["address", "annote", "author", "booktitle",
-                       "email", "chapter", "crossref", "doi", "edition", 
-                       "editor", "howpublished", "institution", "journal", 
-                       "key", "month", "note", "number", "organization", 
-                       "pages", "publisher", "school", "series", "title", 
-                       "type", "volume", "year"]
+            for field in ["author", "title", "publisher", "year", "howpublished",
+    "institution", "journal", "volume", "number", "address",
+    "organization", "school", "series", "issue", "edition",
+    "chapter", "pages", "url", "key", "month",
+    "note", "misc_details", "doi"
+]
+
             if getattr(reference, field) is not None
         },
         }
@@ -94,12 +99,14 @@ def edit_entry(entry_type,entry_id):
     if request.method == "GET":
         return render_template("edit_reference.html", reference=reference, is_edit=True)
     if request.method == "POST":
-        all_options = ["address", "annote", "author", "booktitle",
-                       "email", "chapter", "crossref", "doi", "edition", 
-                       "editor", "howpublished", "institution", "journal", 
-                       "key", "month", "note", "number", "organization", 
-                       "pages", "publisher", "school", "series", "title", 
-                       "type", "volume", "year"]
+        all_options = [
+    "author", "title", "publisher", "year", "howpublished",
+    "institution", "journal", "volume", "number", "address",
+    "organization", "school", "series", "issue", "edition",
+    "chapter", "pages", "url", "key", "month",
+    "note", "misc_details", "doi"
+]
+
         optionals = {}
         for i in all_options:
             test = request.form.get(i)
