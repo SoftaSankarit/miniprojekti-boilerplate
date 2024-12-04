@@ -6,7 +6,7 @@ from db_helper import setup_db
 from repositories.reference_repository \
     import get_references, get_reference_by_id, create_reference, delete_reference, edit_reference
 from config import app, test_env
-from util import validate_year
+# from util import validate_year
 
 # Lataa nykyiset kirjat alkunäytölle
 @app.route("/")
@@ -23,7 +23,12 @@ def new_reference():
 def reference_creation():
     try:
         # Tarkistaa onko valinnainen syöte täytetty ja lisää annetut lisävalinnat
-        all_options = ["address", "annote", "author", "booktitle", "email", "chapter", "crossref", "doi", "edition", "editor", "howpublished", "institution", "journal", "key", "month", "note", "number", "organization", "pages", "publisher", "school", "series", "title", "type", "volume", "year"]
+        all_options = ["address", "annote", "author", "booktitle",
+                       "email", "chapter", "crossref", "doi", "edition", 
+                       "editor", "howpublished", "institution", "journal", 
+                       "key", "month", "note", "number", "organization", 
+                       "pages", "publisher", "school", "series", "title", 
+                       "type", "volume", "year"]
         optionals = {}
         for i in all_options:
             test = request.form.get(i)
