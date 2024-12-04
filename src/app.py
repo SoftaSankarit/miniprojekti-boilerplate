@@ -108,6 +108,7 @@ def edit_entry(entry_type,entry_id):
     "institution", "journal", "volume", "number", "address",
     "organization", "school", "series", "issue", "edition",
     "chapter", "pages", "url", "key", "month",
+    "type", "booktitle", "editor",
     "note", "misc_details", "doi"
 ]
 

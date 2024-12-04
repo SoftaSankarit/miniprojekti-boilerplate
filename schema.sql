@@ -1,8 +1,8 @@
 -- Luo reference-taulu
 CREATE TABLE reference (
     id SERIAL PRIMARY KEY,
-    type VARCHAR(100),
-    title VARCHAR(255) NOT NULL,
+    reftype VARCHAR(100),
+    title VARCHAR(255),
     author VARCHAR(100),
     year VARCHAR(100),
     publisher VARCHAR(100),
@@ -24,5 +24,9 @@ CREATE TABLE reference (
     note TEXT, 
     misc_details TEXT,
     doi VARCHAR(150),
-    address VARCHAR(200)
+    address VARCHAR(200),
+    type VARCHAR(50),
+    booktitle VARCHAR(50),
+    editor VARCHAR(50)
+
 );
