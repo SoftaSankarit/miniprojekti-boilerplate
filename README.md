@@ -4,7 +4,7 @@
 
 [Työaikakirjanpito](https://docs.google.com/spreadsheets/d/1HUKBMod-LS23XXH-n89fmx3qXItWrgfJhurG-o4Alno/edit?usp=sharing)
 
-<!-- [Testikattavuusraportti](https://github.com/SoftaSankarit/miniprojekti-boilerplate/blob/main/Releasenotes.md) -->
+[Testikattavuusraportti](https://app.codecov.io/gh/SoftaSankarit/miniprojekti-boilerplate)
 
 [![GHA workflow badge](https://github.com/SoftaSankarit/miniprojekti-boilerplate/workflows/CI/badge.svg)](https://github.com/SoftaSankarit/miniprojekti-boilerplate/actions)
 
