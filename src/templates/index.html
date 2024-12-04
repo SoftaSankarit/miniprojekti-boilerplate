@@ -64,6 +64,46 @@ Viitesovellus
                             <p>URL: <a href="{{ reference.url }}" target="_blank">{{ reference.url }}</a></p>
                             {% set has_details = true %}
                         {% endif %}
+                        {% if reference.doi %}
+                            <p>DOI: {{ reference.doi }}</p>
+                            {% set has_details = true %}
+                        {% endif %}
+                        {% if reference.chapter %}
+                            <p>Luku: {{ reference.chapter }}</p>
+                            {% set has_details = true %}
+                        {% endif %}
+                        {% if reference.booktitle %}
+                            <p>Teoksen otsikko: {{ reference.booktitle }}</p>
+                            {% set has_details = true %}
+                        {% endif %}
+                        {% if reference.crossref %}
+                            <p>Viittaus: {{ reference.crossref }}</p>
+                            {% set has_details = true %}
+                        {% endif %}
+                        {% if reference.institution %}
+                            <p>Laitos: {{ reference.institution }}</p>
+                            {% set has_details = true %}
+                        {% endif %}
+                        {% if reference.organization %}
+                            <p>Organisaatio: {{ reference.organization }}</p>
+                            {% set has_details = true %}
+                        {% endif %}
+                        {% if reference.howpublished %}
+                            <p>Julkaisumuoto: {{ reference.howpublished }}</p>
+                            {% set has_details = true %}
+                        {% endif %}
+                        {% if reference.pages %}
+                            <p>Sivut: {{ reference.pages }}</p>
+                            {% set has_details = true %}
+                        {% endif %}
+                        {% if reference.school %}
+                            <p>Koulu: {{ reference.school }}</p>
+                            {% set has_details = true %}
+                        {% endif %}
+                        {% if reference.type %}
+                            <p>Julkaisun tyyppi: {{ reference.type }}</p>
+                            {% set has_details = true %}
+                        {% endif %}
                         {% if not has_details %}
                             <p>Ei lisätietoja.</p>
                         {% endif %}
