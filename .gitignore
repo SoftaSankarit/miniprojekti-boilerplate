@@ -9,3 +9,4 @@ report.html
 venv
 .coverage
 database.db
+ci.yaml
