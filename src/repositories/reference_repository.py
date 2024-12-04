@@ -7,12 +7,8 @@ def get_references():
     print(all_references)
     return all_references
 # Luo uuden kirjan
-def create_reference(author, title, publisher, year, optionals):
-    print(author, title, publisher, year, optionals)
-    new_reference = References(author=author,
-                    title=title,
-                    publisher=publisher,
-                    year=year)
+def create_reference(optionals):
+    new_reference = References()
     # Lisää kaikki valinnaiset jos eivät ole tyhjiä
     for field, value in optionals.items():
         if value:
