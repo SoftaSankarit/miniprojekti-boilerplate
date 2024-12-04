@@ -1,6 +1,7 @@
+from sqlalchemy import cast, String
 from config import db
 from entities.reference import References
-from sqlalchemy import cast, String
+
 
 
 # Hakee kaikki kirjat ja niiden tiedot
