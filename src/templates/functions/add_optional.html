@@ -1,0 +1,14 @@
+<script>
+    const toggleButton = document.getElementById('toggleOptionalFields');
+    const optionalFields = document.getElementById('optionalFields');
+  
+    toggleButton.addEventListener('click', () => {
+        if (optionalFields.style.display === 'none') {
+            optionalFields.style.display = 'block';
+            toggleButton.textContent = 'Piilota lisäkentät';
+        } else {
+            optionalFields.style.display = 'none';
+            toggleButton.textContent = 'Näytä lisäkentät';
+        }
+    });
+  </script>
