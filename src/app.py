@@ -13,10 +13,11 @@ from config import app, test_env
 def index():
     references = get_references()
     return render_template("index.html", references=references)
-
-@app.route("/new_reference")
-def new_reference():
-    return render_template("new_reference.html")
+#Lisää uusi viite
+@app.route("/new_reference/<reference_type>")
+def new_reference(reference_type):
+    template_path = f"referencetypes/{reference_type}.html"
+    return render_template("new_reference.html",template_path=template_path)
 
 # Luo kirjan databaseen riippuen syötteistä
 @app.route("/create_reference", methods=["GET","POST"])

@@ -120,23 +120,12 @@ Viitesovellus
 {% endif %}
 </div>
 <br></br>
-<button style="display: inline-block; margin-right: 10px;">
-    <a href="/new_reference" style="color:aliceblue">Lisää uusi viite</a>
-</button>
+{% include "buttons/add_reference.html" %}
 <button style="display: inline-block;">
     <a href="/generate_bibtex" style="color: aliceblue;">Luo BibTeX-tiedosto</a>
 </button>
 
 
 <!-- Scripti joka piilottaa/näyttää lisävalinnat -->
-<script>
-    function toggleDetails(id) {
-        const details = document.getElementById(id);
-        if (details.style.display === "none") {
-            details.style.display = "block";
-        } else {
-            details.style.display = "none";
-        }
-    }
-</script>
+{% include "functions/show_optional.html" %}
 {% endblock %}
