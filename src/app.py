@@ -6,7 +6,7 @@ from db_helper import setup_db
 from repositories.reference_repository \
     import get_references, get_reference_by_id, create_reference, delete_reference, edit_reference, search_references
 from config import app, test_env
-from util import validate_year
+# from util import validate_year
 
 # Lataa nykyiset kirjat alkunäytölle
 @app.route("/")
@@ -26,19 +26,19 @@ def new_reference():
 @app.route("/create_reference", methods=["GET","POST"])
 def reference_creation():
     try:
-        author = request.form.get("author").strip()
-        title = request.form.get("title").strip()
-        publisher = request.form.get("publisher").strip()
-        year = request.form.get("year")
-        validate_year(year=year)
         # Tarkistaa onko valinnainen syöte täytetty ja lisää annetut lisävalinnat
-        all_options = ("volume", "series", "address", "edition", "month", "note", "key", "url")
+        all_options = ["address", "annote", "author", "booktitle",
+                       "email", "chapter", "crossref", "doi", "edition", 
+                       "editor", "howpublished", "institution", "journal", 
+                       "key", "month", "note", "number", "organization", 
+                       "pages", "publisher", "school", "series", "title", 
+                       "type", "volume", "year"]
         optionals = {}
         for i in all_options:
             test = request.form.get(i)
             if test is not None:
                 optionals[i] = test
-        create_reference(author, title, publisher, year, optionals)
+        create_reference(optionals)
         return redirect("/")
     except Exception as error:
         flash(str(error))
@@ -59,7 +59,7 @@ def generate_bibtex():
 
     db_bib.entries = [
         {
-            "ENTRYTYPE": "book",
+            "ENTRYTYPE": reference.type,
             "ID": generate_book_id(reference),
             "author": reference.author,
             "title": reference.title,
