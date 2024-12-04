@@ -8,6 +8,13 @@ Viitesovellus
 
 <h1>Viitteet</h1>
 <div class="custom_box">   
+
+<form method="GET" action="/" style="display: flex; align-items: center;">
+    <input type="text" name="query" placeholder="Hae viitteitä" value="{{ request.args.get('query', '') }}" style="margin-right: 10px;">
+    <button type="submit">Hae</button>
+</form>
+    
+
 {% if references %}
 <p>Viitteet:</p>
     <table>

@@ -1,5 +1,8 @@
+from sqlalchemy import cast, String
 from config import db
 from entities.reference import References
+
+
 
 # Hakee kaikki kirjat ja niiden tiedot
 def get_references():
@@ -32,3 +35,12 @@ def edit_reference(id, optionals): # pylint: disable=invalid-name
 
 def get_reference_by_id(id): # pylint: disable=invalid-name
     return References.query.get(id) # pylint: disable=invalid-name
+
+def search_references(query):
+    search_term = f"%{query}%"
+    return References.query.filter(
+        (References.author.ilike(search_term)) |
+        (References.title.ilike(search_term)) |
+        (References.publisher.ilike(search_term)) |
+        (cast(References.year, String).ilike(search_term))
+    ).all()
