@@ -12,4 +12,3 @@ def validate_todo(content):
 def validate_year(year):
     if int(year) > 2024 or int(year) < 1:
         raise UserInputError("Vuoden tulee olla välillä 1-2024.")
-    

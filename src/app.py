@@ -4,14 +4,18 @@ from bibtexparser.bwriter import BibTexWriter
 from bibtexparser.bibdatabase import BibDatabase
 from db_helper import setup_db
 from repositories.reference_repository \
-    import get_references, get_reference_by_id, create_reference, delete_reference, edit_reference
+    import get_references, get_reference_by_id, create_reference, delete_reference, edit_reference, search_references
 from config import app, test_env
 from util import validate_year
 
 # Lataa nykyiset kirjat alkunäytölle
 @app.route("/")
 def index():
-    references = get_references()
+    query = request.args.get("query")
+    if query:
+        references = search_references(query)
+    else:
+        references = get_references()
     return render_template("index.html", references=references)
 
 @app.route("/new_reference")
