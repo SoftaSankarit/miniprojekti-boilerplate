@@ -26,9 +26,6 @@ def new_reference(reference_type):
 # Luo kirjan databaseen riippuen syötteistä
 @app.route("/create_reference", methods=["GET","POST"])
 def reference_creation():
-    referrer = request.referrer
-    if referrer and "/new_reference/" in referrer:
-        reference_type = referrer.split("/new_reference/")[-1]
 
     try:
         # Tarkistaa onko valinnainen syöte täytetty ja lisää annetut lisävalinnat
@@ -49,12 +46,8 @@ def reference_creation():
                 if test.isdigit():
                     test = str(test)
                 optionals[i] = test
-<<<<<<< HEAD
-        validate_form(reference_type, optionals)
-        create_reference(optionals)
-=======
+        validate_form(reftype, optionals)
         create_reference(optionals, reftype)
->>>>>>> 247be3b (lisätiin reftype)
         return redirect("/")
     except Exception as error:
         print(error)
