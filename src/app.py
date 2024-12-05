@@ -6,7 +6,7 @@ from db_helper import setup_db
 from repositories.reference_repository \
     import get_references, get_reference_by_id, create_reference, delete_reference, edit_reference, search_references
 from config import app, test_env
-# from util import validate_year
+from util import validate_form
 
 # Lataa nykyiset kirjat alkunäytölle
 @app.route("/")
@@ -26,6 +26,10 @@ def new_reference(reference_type):
 # Luo kirjan databaseen riippuen syötteistä
 @app.route("/create_reference", methods=["GET","POST"])
 def reference_creation():
+    referrer = request.referrer
+    if referrer and "/new_reference/" in referrer:
+        reference_type = referrer.split("/new_reference/")[-1]
+
     try:
         # Tarkistaa onko valinnainen syöte täytetty ja lisää annetut lisävalinnat
         all_options = [
@@ -43,11 +47,13 @@ def reference_creation():
                 if test.isdigit():
                     test = str(test)
                 optionals[i] = test
+        validate_form(reference_type, optionals)
         create_reference(optionals)
         return redirect("/")
     except Exception as error:
-        flash(str(error))
-        return redirect("/new_reference")
+        print(error)
+        error_message = str(error) if isinstance(error, Exception) else "Tapahtui tuntematon virhe."
+        return render_template("error.html", error=error_message)
 
 # Luo txt-muotoisen tiedoston, jossa ovat kaikki kirjat BibTeX muodossa
 @app.route("/generate_bibtex")
