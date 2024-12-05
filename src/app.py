@@ -1,5 +1,5 @@
 import io
-from flask import redirect, render_template, request, jsonify, send_file, flash
+from flask import redirect, render_template, request, jsonify, send_file #, flash
 from bibtexparser.bwriter import BibTexWriter
 from bibtexparser.bibdatabase import BibDatabase
 from db_helper import setup_db
