@@ -11,6 +11,7 @@ Viitesovellus
 <div class="form-container">
   <form method="POST" action="/create_reference" id="referenceForm">
     {% include template_path %}
+    <input type="hidden" name="reftype" value="{{ reference_type }}">
     <button type="button" id="toggleOptionalFields">Näytä lisäkentät</button>
     <button type="submit">Lisää</button>
   </form>

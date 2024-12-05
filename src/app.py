@@ -21,7 +21,7 @@ def index():
 @app.route("/new_reference/<reference_type>")
 def new_reference(reference_type):
     template_path = f"referencetypes/{reference_type}.html"
-    return render_template("new_reference.html",template_path=template_path)
+    return render_template("new_reference.html",template_path=template_path, reference_type=reference_type)
 
 # Luo kirjan databaseen riippuen syötteistä
 @app.route("/create_reference", methods=["GET","POST"])
@@ -41,14 +41,20 @@ def reference_creation():
 ]
 
         optionals = {}
+        reftype = request.form.get("reftype")
+        print(reftype)
         for i in all_options:
             test = request.form.get(i)
             if test is not None:
                 if test.isdigit():
                     test = str(test)
                 optionals[i] = test
+<<<<<<< HEAD
         validate_form(reference_type, optionals)
         create_reference(optionals)
+=======
+        create_reference(optionals, reftype)
+>>>>>>> 247be3b (lisätiin reftype)
         return redirect("/")
     except Exception as error:
         print(error)
@@ -70,7 +76,7 @@ def generate_bibtex():
 
     db_bib.entries = [
         {
-            "ENTRYTYPE": "book",
+            "ENTRYTYPE": reference.reftype,
             "ID": generate_book_id(reference),
         **{
             field: getattr(reference, field)

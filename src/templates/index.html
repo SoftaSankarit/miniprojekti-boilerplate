@@ -20,6 +20,7 @@ Viitesovellus
     <table>
         <thead>
             <tr>
+                <th>Tyyppi</th>
                 <th>Tekijät</th>
                 <th>Teoksen nimi</th>
                 <th>Kustantaja</th>
@@ -29,6 +30,7 @@ Viitesovellus
         <tbody>
             {% for reference in references %}
             <tr>
+                <td>{{ reference.reftype }}</td>
                 <td>{{ reference.author }}</td>
                 <td>{{ reference.title }}</td>
                 <td>{{ reference.publisher }}</td>

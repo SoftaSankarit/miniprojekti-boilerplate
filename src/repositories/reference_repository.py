@@ -10,8 +10,9 @@ def get_references():
     print(all_references)
     return all_references
 # Luo uuden kirjan
-def create_reference(optionals):
+def create_reference(optionals, reftype):
     new_reference = References()
+    setattr(new_reference, "reftype", reftype)
     # Lisää kaikki valinnaiset jos eivät ole tyhjiä
     for field, value in optionals.items():
         if value:

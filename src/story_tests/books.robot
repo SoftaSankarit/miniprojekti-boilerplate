@@ -19,10 +19,12 @@ After adding a book, there is one
     Input Text  publisher  Julkaisija
     Input Text  year  2024
     Click Button  Lisää
+    Page Should Contain  Tyyppi
     Page Should Contain  Tekijät
     Page Should Contain  Teoksen nimi
     Page Should Contain  Kustantaja
     Page Should Contain  Julkaisuvuosi
+    Page Should Contain  book
     Page Should Contain  Erkki Esimerkki
     Page Should Contain  Otsikko
     Page Should Contain  Julkaisija
@@ -53,10 +55,12 @@ After editing book values change
     Click Link  Muokkaa
     Input Text  year  2019
     Click Button  Tallenna muutokset
+    Page Should Contain  Tyyppi
     Page Should Contain  Tekijät
     Page Should Contain  Teoksen nimi
     Page Should Contain  Kustantaja
     Page Should Contain  Julkaisuvuosi
+    Page Should Contain  book
     Page Should Contain  Erkki Esimerkki
     Page Should Contain  Otsikko
     Page Should Contain  Julkaisija
