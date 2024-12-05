@@ -64,14 +64,6 @@ REFERENCE_FIELDS = {
 }
 
 
-def validate_todo(content):
-    if len(content) < 5:
-        raise UserInputError("Todo content length must be greater than 4")
-
-    if len(content) > 100:
-        raise UserInputError("Todo content length must be smaller than 100")
-
-
 def validate_year(year):
     if len(year) != 4:
         raise UserInputError("Vuoden tulee olla 4 merkkiä.")
@@ -107,7 +99,7 @@ def validate_form(reference_type, fields):
             if value is None:
                 raise UserInputError("Syöte ei saa olla tyhjä.")
             if not re.match(r'^[a-zA-Z0-9äöåÄÖÅ\s.,&\'"()-]*$', value):
-                raise UserInputError(f"""{value} sisältää kiellettyjä merkkejä. 
+                raise UserInputError(f"""{value} sisältää kiellettyjä merkkejä.
                                      Sallitut erikoismerkit ovat: . , & ' \" ( ) -""")
             if field == "year":
                 validate_year(value)
