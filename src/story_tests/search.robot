@@ -23,7 +23,7 @@ After search it only shows references that have the searchword in them
     Click Button  Lisää
     Input Text  query  Maija
     Click Button  Hae
-    Page Should Contain  Tyyppi
+    Page Should Contain  Viitetyyppi
     Page Should Contain  Tekijät
     Page Should Contain  Teoksen nimi
     Page Should Contain  Kustantaja

@@ -10,7 +10,7 @@ REFERENCE_FIELDS = {
         ["volume/number", "pages", "month", "doi", "note", "key"]
     ],
     "book": [
-        ["author/editor", "title", "publisher", "year"],
+        ["author", "title", "publisher", "year"],
         ["volume/number", "series", "address", "edition", "month", "note", "key", "url"]
     ],
     "booklet": [
@@ -22,7 +22,7 @@ REFERENCE_FIELDS = {
         ["editor", "volume/number", "series", "pages", "address", "month", "organization", "publisher", "note", "key"]
     ],
     "inbook": [
-        ["author/editor", "title", "chapter/pages", "publisher", "year"],
+        ["author", "title", "chapter/pages", "publisher", "year"],
         ["volume/number", "series", "type", "address", "edition", "month", "note", "key"]
     ],
     "incollection": [
@@ -65,33 +65,24 @@ REFERENCE_FIELDS = {
 
 
 def validate_year(year):
-    if len(year) != 4:
-        raise UserInputError("Vuoden tulee olla 4 merkkiä.")
-
     try:
         int(year)
     except ValueError:
-        raise UserInputError("Vuoden tulee olla numero.")
+        raise UserInputError("Vuoden pitää olla numero.")
 
     if int(year) > 2024 or int(year) < 1:
-        raise UserInputError("Vuoden tulee olla välillä 1-2024.")
-
-
-def validate_volume(volume):
-    try:
-        int(volume)
-    except ValueError:
-        raise UserInputError("Volyymin tulee olla numero.")
-
+        raise UserInputError("Vuoden pitää olla välillä 1-2024.")
 
 def validate_text_field(text):
+    print(text)
     if len(text) > 40:
-        raise UserInputError("Syötteen tulee olla vähemmän kuin 40 merkkiä.")
+        raise UserInputError("Syötteen pitää olla lyhyempi kuin 40 merkkiä.")
     if len(text) < 3:
-        raise UserInputError("Syötteen tulee olla enemmän kuin 3 merkkiä.")
+        raise UserInputError("Syötteen pitää olla pidempi kuin 3 merkkiä.")
 
 
 def validate_form(reference_type, fields):
+    print("Virheiden tarkistus")
     for field in fields:
         value = fields[field]
         # jos kenttä on pakollinen
@@ -105,5 +96,9 @@ def validate_form(reference_type, fields):
                 validate_year(value)
             if field == "author":
                 validate_text_field(value)
-            if field == "volume":
-                validate_volume(value)
+            if field == "title":
+                validate_text_field(value)
+            if field == "journal":
+                validate_text_field(value)
+            if field == "publisher":
+                validate_text_field(value)

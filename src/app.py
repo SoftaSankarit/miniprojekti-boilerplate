@@ -1,5 +1,5 @@
 import io
-from flask import redirect, render_template, request, jsonify, send_file #, flash
+from flask import redirect, render_template, request, jsonify, send_file, flash
 from bibtexparser.bwriter import BibTexWriter
 from bibtexparser.bibdatabase import BibDatabase
 from db_helper import setup_db
@@ -51,8 +51,10 @@ def reference_creation():
         return redirect("/")
     except Exception as error:
         print(error)
-        error_message = str(error) if isinstance(error, Exception) else "Tapahtui tuntematon virhe."
-        return render_template("error.html", error=error_message)
+        #error_message = str(error) if isinstance(error, Exception) else "Tapahtui tuntematon virhe."
+        #return render_template("error.html", error=error_message)
+        flash(str(error))
+        return redirect(f"/new_reference/{reftype}")
 
 # Luo txt-muotoisen tiedoston, jossa ovat kaikki kirjat BibTeX muodossa
 @app.route("/generate_bibtex")
