@@ -141,7 +141,7 @@ def edit_entry(entry_type,entry_id):
             test = request.form.get(i)
             if test is not None:
                 optionals[i] = test
-        edit_reference(id=entry_id, optionals=optionals)
+        edit_reference(reference_id=entry_id, optionals=optionals)
         return redirect("/")
     return redirect("/")
 
