@@ -62,17 +62,34 @@ def generate_bibtex():
     references = get_references()
     db_bib = BibDatabase()
 
-    def generate_book_id(reference):
-        author_last_name = reference.author.split(" ")[-1]
-        title = reference.title.split(" ")[0]
-        year = reference.year
-        reference_id = author_last_name + title + year
-        return reference_id
+    # def generate_book_id(reference):
+    #     author_last_name = reference.author.split(" ")[-1]
+    #     title = reference.title.split(" ")[0]
+    #     year = reference.year
+    #     reference_id = author_last_name + title + year
+    #     return reference_id
+
+    def generate_reference_id(reference):
+        if reference.author:
+            name = reference.author.split(" ")[-1]
+        elif reference.editor:
+            name = reference.editor.split(" ")[-1]
+        else:
+            name = "Unknown"
+        if reference.title:
+            title = reference.title.split(" ")[0]
+        else:
+            title = "Misc" + str(reference.id)
+        if reference.year:
+            year = reference.year
+        else:
+            year = "N.D" # No Date
+        return name + title + year
 
     db_bib.entries = [
         {
             "ENTRYTYPE": reference.reftype,
-            "ID": generate_book_id(reference),
+            "ID": generate_reference_id(reference),
         **{
             field: getattr(reference, field)
             for field in ["author", "title", "publisher", "year", "howpublished",
