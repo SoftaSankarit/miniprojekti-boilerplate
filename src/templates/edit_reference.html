@@ -5,8 +5,10 @@ Viitesovellus
 {% endblock %}
 
 {% block body %}
-
-<div class="form-container">
+<br>
+<br>
+<h2>{{ reftype|capitalize }}</h2>
+<div class="custom_box" style="width: 650px;">
   <form method="POST" action='/edit_entry/reference/{{ reference.id }}' id="editForm">
     <div class="form-group">
       <label for="author">Tekijät:</label>
@@ -108,7 +110,7 @@ Viitesovellus
   </form>
 </div>
 <br>
-<p><button><a href="/" style="color:aliceblue">Takaisin</a></button></p>
+<p><a href="/" class="button-link">Takaisin</a></p>
 <script>
   const toggleButton = document.getElementById('toggleOptionalFields');
   const optionalFields = document.getElementById('optionalFields');
