@@ -1,5 +1,3 @@
-import re
-
 class UserInputError(Exception):
     pass
 
@@ -73,32 +71,88 @@ def validate_year(year):
     if int(year) > 2024 or int(year) < 1:
         raise UserInputError("Vuoden pitää olla välillä 1-2024.")
 
+
 def validate_text_field(text):
-    print(text)
-    if len(text) > 40:
-        raise UserInputError("Syötteen pitää olla lyhyempi kuin 40 merkkiä.")
+    if len(text) > 150:
+        raise UserInputError("Syötteen pitää olla lyhyempi kuin 150 merkkiä.")
     if len(text) < 3:
         raise UserInputError("Syötteen pitää olla pidempi kuin 3 merkkiä.")
+
+
+def validate_doi(doi):
+    if not doi.startswith("10."):
+        raise UserInputError("DOI:n pitää alkaa '10.'.")
+    if len(doi) > 255:
+        raise UserInputError("DOI:n pituus ei saa ylittää 200 merkkiä.")
 
 
 def validate_form(reference_type, fields):
     print("Virheiden tarkistus")
     for field in fields:
         value = fields[field]
-        # jos kenttä on pakollinen
+        # jos kenttä on pakollinen tai jos kenttä on valinnainen ja se on täytetty
         if field in REFERENCE_FIELDS[reference_type][0]:
             if value is None:
                 raise UserInputError("Syöte ei saa olla tyhjä.")
-            if not re.match(r'^[a-zA-Z0-9äöåÄÖÅ\s.,&\'"()-]*$', value):
-                raise UserInputError(f"""{value} sisältää kiellettyjä merkkejä.
-                                     Sallitut erikoismerkit ovat: . , & ' \" ( ) -""")
             if field == "year":
                 validate_year(value)
-            if field == "author":
+            elif field in ["author", "title", "publisher", "institution", "journal",
+                           "organization", "school", "series", "issue", "edition", 
+                           "chapter", "key", "note", "misc_details"]:
                 validate_text_field(value)
-            if field == "title":
-                validate_text_field(value)
-            if field == "journal":
-                validate_text_field(value)
-            if field == "publisher":
-                validate_text_field(value)
+            elif field == "doi":
+                validate_doi(value)
+
+
+def find_crossref_type(data):
+    crossref_type = data.get("type", "unknown")
+    type_dict = {
+        "journal-article": "article",
+        "book": "book",
+        "book-chapter": "inbook",
+        "proceedings-article": "inproceedings",
+        "dataset": "misc",
+        "report": "techreport",
+        "thesis": "phdthesis",
+        "other": "misc",
+    }
+    return type_dict.get(crossref_type, None)
+
+
+def fill_doi_fields(reference_type, data):
+    all_fields = REFERENCE_FIELDS[reference_type][0] + REFERENCE_FIELDS[reference_type][1]
+    filled_fields = {}
+
+    for field in all_fields:
+        if field == "author" and "author" in data:
+            authors = [
+                f"{author.get('given', '')} {author.get('family', '')}"
+                for author in data["author"]
+            ]
+            if len(authors) > 1:
+                filled_fields[field] = authors[0] + ", et al."
+            else:
+                filled_fields[field] = authors[0]
+
+        elif field == "title" and "title" in data:
+            filled_fields[field] = data["title"][0]
+
+        elif field == "volume/number" and "volume" in data:
+            filled_fields[field] = data["volume"]
+
+        elif field == "year" and "license" in data and data["license"]:
+            license_date = data["license"][0].get("start", {}).get("date-parts", [[None, None, None]])[0]
+            filled_fields["year"] = license_date[0]
+            filled_fields["month"] = license_date[1]
+            filled_fields["day"] = license_date[2]
+
+        elif field == "journal" and "container-title" in data:
+            filled_fields[field] = data["container-title"][0]
+
+        elif field == "pages" and "page" in data:
+            filled_fields[field] = data["page"]
+
+        elif field == "doi" and "DOI" in data:
+            filled_fields[field] = data["DOI"]
+
+    return filled_fields

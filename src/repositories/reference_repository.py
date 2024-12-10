@@ -19,6 +19,7 @@ def create_reference(optionals, reftype):
             setattr(new_reference, field, value)
     db.session.add(new_reference)
     db.session.commit()
+    return new_reference
 
 
 def delete_reference(id): # pylint: disable=invalid-name
