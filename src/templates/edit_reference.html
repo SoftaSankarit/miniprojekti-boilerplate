@@ -9,6 +9,8 @@ Viitesovellus
 <div class="form-container">
   <form method="POST" action='/edit_entry/reference/{{ reference.id }}' id="editForm">
     {% include template_path %}
+    <input type="hidden" name="reftype" value="{{ reference_type }}">
+    <button type="button" id="toggleOptionalFields">Näytä lisäkentät</button>
   </form>
 </div>
 <br>
