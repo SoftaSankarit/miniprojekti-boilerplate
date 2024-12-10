@@ -8,6 +8,8 @@
 
 [![GHA workflow badge](https://github.com/SoftaSankarit/miniprojekti-boilerplate/workflows/CI/badge.svg)](https://github.com/SoftaSankarit/miniprojekti-boilerplate/actions)
 
+[![codecov](https://codecov.io/gh/SoftaSankarit/miniprojekti-boilerplate/graph/badge.svg?token=1HIWHK3N7W)](https://codecov.io/gh/SoftaSankarit/miniprojekti-boilerplate)
+
 ### Definition of Done
 "Vaatimus on analysoitu, suunniteltu, ohjelmoitu, testattu, testaus automatisoitu, dokumentoitu, integroitu muuhun ohjelmistoon ja viety tuotantoympäristöön."
 
