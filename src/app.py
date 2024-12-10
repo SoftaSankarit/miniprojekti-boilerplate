@@ -35,6 +35,7 @@ def reference_creation():
     "institution", "journal", "volume", "number", "address",
     "organization", "school", "series", "issue", "edition",
     "chapter", "pages", "url", "key", "month",
+    "type", "booktitle", "editor",
     "note", "misc_details", "doi"
 ]
 
@@ -119,6 +120,7 @@ def generate_bibtex():
     "institution", "journal", "volume", "number", "address",
     "organization", "school", "series", "issue", "edition",
     "chapter", "pages", "url", "key", "month",
+    "type", "booktitle", "editor",
     "note", "misc_details", "doi"
 ]
 
