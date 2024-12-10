@@ -9,6 +9,7 @@ from repositories.reference_repository \
 from config import app, test_env
 from util import validate_form, find_crossref_type, fill_doi_fields, REFERENCE_FIELDS
 
+
 # Lataa nykyiset kirjat alkunäytölle
 @app.route("/")
 def index():
@@ -18,41 +19,47 @@ def index():
     else:
         references = get_references()
     return render_template("index.html", references=references)
+
+
 #Lisää uusi viite
 @app.route("/new_reference/<reference_type>")
 def new_reference(reference_type):
-    template_path = f"referencetypes/{reference_type}.html"
-    return render_template("new_reference.html",template_path=template_path, reference_type=reference_type)
+    if reference_type not in REFERENCE_FIELDS:
+        return render_template("error.html", error="Sivua ei löytynyt.")
+    return render_template("new_reference.html", 
+                           reference_type=reference_type, 
+                           reference_fields=REFERENCE_FIELDS)
 
-# Luo kirjan databaseen riippuen syötteistä
+
+# Luo viitteen databaseen riippuen syötteistä
 @app.route("/create_reference", methods=["GET","POST"])
 def reference_creation():
+    reftype = request.form.get("reftype")
+    filled_fields = {}
+
+    for field in REFERENCE_FIELDS[reftype][0]:
+        filled_fields[field] = request.form.get(field)
+
+    for field in REFERENCE_FIELDS[reftype][1]:
+        value = request.form.get(field)
+        if value:
+            filled_fields[field] = value
+
+    print(reftype)
 
     try:
-        # Tarkistaa onko valinnainen syöte täytetty ja lisää annetut lisävalinnat
-        all_options = [
-    "author", "title", "publisher", "year", "howpublished",
-    "institution", "journal", "volume", "number", "address",
-    "organization", "school", "series", "issue", "edition",
-    "chapter", "pages", "url", "key", "month",
-    "note", "misc_details", "doi"
-]
-
-        optionals = {}
-        reftype = request.form.get("reftype")
-        print(reftype)
-        for i in all_options:
-            test = request.form.get(i)
-            if test is not None:
-                if test.isdigit():
-                    test = str(test)
-                optionals[i] = test
-        validate_form(reftype, optionals)
-        create_reference(optionals, reftype)
+        validate_form(reftype, filled_fields)
+        create_reference(filled_fields, reftype)
         return redirect("/")
+
     except Exception as error:
         flash(str(error))
-        return redirect(f"/new_reference/{reftype}")
+        return render_template(
+            "new_reference.html",
+            form_data=filled_fields,
+            reference_type=reftype,
+            reference_fields=REFERENCE_FIELDS,
+        )
 
 
 # Luo viitteen doi-tunnuksen perusteella
@@ -81,7 +88,7 @@ def doi_reference():
                             )
     except Exception as error:
         flash(str(error))
-        return redirect(f"/new_reference/{reference_type}")
+        return redirect(f"/#doiForm")
 
 
 # Luo txt-muotoisen tiedoston, jossa ovat kaikki kirjat BibTeX muodossa

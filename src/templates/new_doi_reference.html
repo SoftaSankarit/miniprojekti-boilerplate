@@ -12,6 +12,7 @@ Viitesovellus
   <form method="POST" action="/create_reference" id="doireferenceForm">
     <input type="hidden" name="reftype" value="{{ reference_type }}">
     {% if reference_type in reference_fields %}
+        <!-- pakolliset kentät -->
         {% for field in reference_fields[reference_type][0] %}
         <label for="{{ field }}">{{ field | capitalize }}:</label>
         <input type="text" 
@@ -20,6 +21,7 @@ Viitesovellus
         value="{{ form_data.get(field, '') if form_data else '' }}"
         placeholder="Pakollinen kenttä">
         {% endfor %}
+        <!-- valinnaiset kentät -->
         {% for field in reference_fields[reference_type][1] %}
         <label for="{{ field }}">{{ field | capitalize }}:</label>
         <input type="text" 
