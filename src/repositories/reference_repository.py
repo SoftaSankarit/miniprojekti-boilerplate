@@ -9,7 +9,7 @@ def get_references():
     all_references = References.query.order_by(References.id).all()
     print(all_references)
     return all_references
-# Luo uuden kirjan
+
 def create_reference(optionals, reftype):
     new_reference = References()
     setattr(new_reference, "reftype", reftype)
@@ -20,7 +20,6 @@ def create_reference(optionals, reftype):
     db.session.add(new_reference)
     db.session.commit()
     return new_reference
-
 
 def delete_reference(id):
     References.query.filter_by(id=id).delete()
@@ -33,7 +32,6 @@ def edit_reference(id, optionals):
         if value:
             setattr(reference, field, value)
     db.session.commit()
-
 
 def get_reference_by_id(id):
     return References.query.get(id)

@@ -90,6 +90,8 @@ def generate_bibtex():
     def generate_reference_id(reference):
         if reference.author:
             name = reference.author.split(" ")[-1]
+            if name == "al.":
+                name = reference.author.split(" ")[-3].strip(",")
         elif reference.editor:
             name = reference.editor.split(" ")[-1]
         else:
