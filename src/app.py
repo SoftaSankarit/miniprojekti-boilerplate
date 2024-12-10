@@ -2,11 +2,13 @@ import io
 from flask import redirect, render_template, request, jsonify, send_file, flash
 from bibtexparser.bwriter import BibTexWriter
 from bibtexparser.bibdatabase import BibDatabase
+import requests
 from db_helper import setup_db
 from repositories.reference_repository \
     import get_references, get_reference_by_id, create_reference, delete_reference, edit_reference, search_references
 from config import app, test_env
-from util import validate_form
+from util import validate_form, find_crossref_type, fill_doi_fields
+#, REFERENCE_FIELDS
 
 # Lataa nykyiset kirjat alkunäytölle
 @app.route("/")
@@ -50,11 +52,43 @@ def reference_creation():
         create_reference(optionals, reftype)
         return redirect("/")
     except Exception as error:
-        print(error)
-        #error_message = str(error) if isinstance(error, Exception) else "Tapahtui tuntematon virhe."
-        #return render_template("error.html", error=error_message)
         flash(str(error))
         return redirect(f"/new_reference/{reftype}")
+
+
+# Luo viitteen doi-tunnuksen perusteella
+@app.route("/doi_reference", methods=["GET","POST"])
+def doi_reference():
+    doi = request.form.get("doi")
+    if not doi:
+        flash("Kenttää ei voi jättää tyhjäksi.")
+        return redirect("/#doiForm")
+
+    response = requests.get(f"https://api.crossref.org/works/{doi}", timeout=10)
+    if response.status_code != 200:
+        flash("Virhe. Tarkista DOI.")
+        return redirect("/")
+
+    doi_data = response.json().get("message", {})
+    reference_type = find_crossref_type(doi_data)
+    prefilled_data = fill_doi_fields(reference_type, doi_data)
+
+    create_reference(prefilled_data, reference_type)
+    try:
+        validate_form(reference_type, prefilled_data)
+        create_reference(prefilled_data, reference_type)
+        return redirect("/")
+    except Exception as error:
+        flash(str(error))
+        return redirect(f"/new_reference/{reference_type}")
+
+# en saanu toimimaan versiota missä esitäytettyä lomaketta vois muokata ennen viitteen luontia:
+    # return render_template("new_doi_reference.html",
+    #                        form_data=prefilled_data,
+    #                        reference_type=reference_type,
+    #                        reference_fields=REFERENCE_FIELDS
+    #                        )
+
 
 # Luo txt-muotoisen tiedoston, jossa ovat kaikki kirjat BibTeX muodossa
 @app.route("/generate_bibtex")

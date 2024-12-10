@@ -134,6 +134,18 @@ Viitesovellus
     <a href="/generate_bibtex" style="color: aliceblue;">Luo BibTeX-tiedosto</a>
 </button>
 
+<br>
+<br>
+
+{% include "functions/ifmessages.html" %}
+
+<div class="custom_box">
+    <h4>Tuo viitteen tiedot doi-tunnuksen avulla:</h4>
+    <form method="POST" action="/doi_reference" id="doiForm">
+        <input type="text" id="doi" name="doi" placeholder="Esim. 10.1109/TC.2021.3063618">
+        <button type="submit">Lisää</button>
+    </form>
+</div>
 
 <!-- Scripti joka piilottaa/näyttää lisävalinnat -->
 {% include "functions/show_optional.html" %}

@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Viitesovellus
+{% endblock %}
+
+
+{% block body %}
+{% include "functions/ifmessages.html" %}
+
+<div class="form-container">
+  <form method="POST" action="/create_reference" id="doireferenceForm">
+    <input type="hidden" name="reftype" value="{{ reference_type }}">
+    {% if reference_type in reference_fields %}
+        {% for field in reference_fields[reference_type][0] + reference_fields[reference_type][1] %}
+        <label for="{{ field }}">{{ field | capitalize }}:</label>
+        <input type="text" 
+        id="{{ field }}" 
+        name="{{ field }}" 
+        value="{{ form_data.get(field, '') if form_data else '' }}"
+        placeholder="{% if field in reference_fields[reference_type][0] %}Pakollinen kenttä{% endif %}">
+        {% endfor %}
+    {% endif %}
+    <button type="submit">Lisää</button>
+  </form>
+</div>
+
+<br></b>
+<p><button><a href="/" style="color:aliceblue">Lista Viitteistä</a></button></p>
+
+{% include "functions/add_optional.html" %}
+{% endblock %}
