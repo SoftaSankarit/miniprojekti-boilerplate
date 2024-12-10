@@ -7,7 +7,7 @@ Viitesovellus
 {% block body %}
 
 <div class="form-container">
-  <form method="POST" action='/edit_entry/reference/{{ reference.id }}' id="editForm">
+  <form method="POST" action='/edit_entry/{{reference.reftype}}/{{ reference.id }}' id="editForm">
     {% include template_path %}
     <button type="button" id="toggleOptionalFields">Näytä lisäkentät</button>
     <button type="submit">Tallenna muutokset</button>
