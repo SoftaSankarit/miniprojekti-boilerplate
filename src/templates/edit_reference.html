@@ -9,12 +9,112 @@ Viitesovellus
 <div class="form-container">
   <form method="POST" action='/edit_entry/{{reference.reftype}}/{{ reference.id }}' id="editForm">
     {% include template_path %}
+<br>
+<br>
+<h2>{{ reftype|capitalize }}</h2>
+<div class="custom_box" style="width: 650px;">
+  <form method="POST" action='/edit_entry/reference/{{ reference.id }}' id="editForm">
+    <div class="form-group">
+      <label for="author">Tekijät:</label>
+      <input type="text" id="author" name="author" value="{{ reference.author or '' }}" placeholder="Pakollinen tieto">
+    </div>
+    <div class="form-group">
+      <label for="title">Teoksen nimi:</label>
+      <input type="text" id="title" name="title" value="{{ reference.title or '' }}" placeholder="Pakollinen tieto">
+    </div>
+    <div class="form-group">
+      <label for="publisher">Kustantaja:</label>
+      <input type="text" id="publisher" name="publisher" value="{{ reference.publisher or '' }}" placeholder="Pakollinen tieto">
+    </div>
+    <div class="form-group">
+      <label for="year">Julkaisuvuosi:</label>
+      <input type="number" id="year" name="year" value="{{ reference.year or '' }}" placeholder="Pakollinen tieto">
+    </div>
+    <!-- Alussa valinnat piilossa -->
+    <div id="optionalFields" style="display: none;">
+      <div class="form-group">
+          <label for="volume">Volyymi:</label>
+          <input type="text" id="volume" name="volume" value="{{ reference.volume or '' }}" placeholder="Valinnainen tieto">
+      </div>
+      <div class="form-group">
+          <label for="series">Sarja:</label>
+          <input type="text" id="series" name="series" value="{{ reference.series or '' }}" placeholder="Valinnainen tieto">
+      </div>
+      <div class="form-group">
+          <label for="address">Osoite:</label>
+          <input type="text" id="address" name="address" value="{{ reference.address or '' }}" placeholder="Valinnainen tieto">
+      </div>
+      <div class="form-group">
+          <label for="edition">Painos:</label>
+          <input type="text" id="edition" name="edition" value="{{ reference.edition or '' }}" placeholder="Valinnainen tieto">
+      </div>
+      <div class="form-group">
+          <label for="month">Kuukausi:</label>
+          <input type="text" id="month" name="month" value="{{ reference.month or '' }}" placeholder="Valinnainen tieto">
+      </div>
+      <div class="form-group">
+          <label for="note">Muistiinpano:</label>
+          <textarea id="note" name="note" rows="4" value="{{ reference.note or '' }}" placeholder="Valinnainen tieto"></textarea>
+      </div>
+      <div class="form-group">
+          <label for="key">Avain:</label>
+          <input type="text" id="key" name="key" value="{{ reference.key or '' }}" placeholder="Valinnainen tieto">
+      </div>
+      <div class="form-group">
+          <label for="url">URL:</label>
+          <input type="url" id="url" name="url" value="{{ reference.url or '' }}" placeholder="Valinnainen tieto">
+      </div>
+      <div class="form-group">
+        <label for="doi">DOI:</label>
+        <input type="text" id="doi" name="doi" value="{{ reference.doi or '' }}" placeholder="Valinnainen tieto">
+      </div>
+      <div class="form-group">
+        <label for="chapter">Kappale:</label>
+        <input type="text" id="chapter" name="chapter" value="{{ reference.chapter or '' }}" placeholder="Valinnainen tieto">
+      </div>
+      <div class="form-group">
+        <label for="howpublished">Miten julkaistu:</label>
+        <input type="text" id="howpublished" name="howpublished" value="{{ reference.howpublished or '' }}" placeholder="Valinnainen tieto">
+      </div>
+      <div class="form-group">
+        <label for="institution">Instituutio:</label>
+        <input type="text" id="institution" name="institution" value="{{ reference.institution or '' }}" placeholder="Valinnainen tieto">
+      </div>
+      <div class="form-group">
+        <label for="issue">Julkaisu:</label>
+        <input type="number" id="issue" name="issue" value="{{ reference.issue or '' }}" placeholder="Valinnainen tieto">
+      </div>
+      <div class="form-group">
+        <label for="journal">Aikakauslehti:</label>
+        <input type="text" id="journal" name="journal" value="{{ reference.journal or '' }}" placeholder="Valinnainen tieto">
+      </div>
+      <div class="form-group">
+        <label for="misc_details">Misc lisätieto:</label>
+        <input type="text" id="misc_details" name="misc_details" value="{{ reference.misc_details or '' }}" placeholder="Valinnainen tieto">
+      </div>
+      <div class="form-group">
+        <label for="number">Numero:</label>
+        <input type="number" id="number" name="number" value="{{ reference.number or '' }}" placeholder="Valinnainen tieto">
+      </div>
+      <div class="form-group">
+        <label for="organization">Organisaatio:</label>
+        <input type="text" id="organization" name="organization" value="{{ reference.organization or '' }}" placeholder="Valinnainen tieto">
+      </div>
+      <div class="form-group">
+        <label for="pages">Sivut:</label>
+        <input type="text" id="pages" name="pages" value="{{ reference.pages or '' }}" placeholder="Valinnainen tieto">
+      </div>
+      <div class="form-group">
+        <label for="school">Koulu:</label>
+        <input type="text" id="school" name="school" value="{{ reference.school or '' }}" placeholder="Valinnainen tieto">
+      </div>
+    </div>
     <button type="button" id="toggleOptionalFields">Näytä lisäkentät</button>
     <button type="submit">Tallenna muutokset</button>
   </form>
 </div>
 <br>
-<p><button><a href="/" style="color:aliceblue">Takaisin</a></button></p>
+<p><a href="/" class="button-link">Takaisin</a></p>
 <script>
   const toggleButton = document.getElementById('toggleOptionalFields');
   const optionalFields = document.getElementById('optionalFields');

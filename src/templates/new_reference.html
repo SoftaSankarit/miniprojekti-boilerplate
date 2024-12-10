@@ -4,11 +4,12 @@
 Viitesovellus
 {% endblock %}
 
-
 {% block body %}
 {% include "functions/ifmessages.html" %}
-
-<div class="form-container">
+<br>
+<br>
+<h2>{{ reference_type|capitalize }}</h2>
+<div class="custom_box" style="width: 650px;">
   <form method="POST" action="/create_reference" id="referenceForm">
     {% include template_path %}
     <input type="hidden" name="reftype" value="{{ reference_type }}">
@@ -18,7 +19,7 @@ Viitesovellus
 </div>
 
 <br></b>
-<p><button><a href="/" style="color:aliceblue">Lista Viitteistä</a></button></p>
+<p><a href="/" class="button-link">Lista Viitteistä</a></p>
 
 {% include "functions/add_optional.html" %}
 {% endblock %}
