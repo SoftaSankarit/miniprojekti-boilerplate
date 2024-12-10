@@ -7,7 +7,7 @@ from db_helper import setup_db
 from repositories.reference_repository \
     import get_references, get_reference_by_id, create_reference, delete_reference, edit_reference, search_references
 from config import app, test_env
-from util import validate_form, find_crossref_type, fill_doi_fields
+from util import validate_form, find_crossref_type, fill_doi_fields, REFERENCE_FIELDS
 
 # Lataa nykyiset kirjat alkunäytölle
 @app.route("/")
@@ -74,8 +74,11 @@ def doi_reference():
 
     try:
         validate_form(reference_type, prefilled_data)
-        reference = create_reference(prefilled_data, reference_type)
-        return render_template("edit_reference.html", reference=reference)
+        return render_template("new_doi_reference.html",
+                            form_data=prefilled_data,
+                            reference_type=reference_type,
+                            reference_fields=REFERENCE_FIELDS
+                            )
     except Exception as error:
         flash(str(error))
         return redirect(f"/new_reference/{reference_type}")
