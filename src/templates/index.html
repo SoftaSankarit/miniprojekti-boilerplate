@@ -5,12 +5,13 @@ Viitesovellus
 {% endblock %}
 
 {% block body %}
-
-<h1>Viitteet</h1>
+<br>
+<br>
+<h1>Viitesovellus</h1>
 <div class="custom_box">   
 
-<form method="GET" action="/" style="display: flex; align-items: center;">
-    <input type="text" name="query" placeholder="Hae viitteitä" value="{{ request.args.get('query', '') }}" style="margin-right: 10px;">
+<form method="GET" action="/" style="display: flex; align-items: center; width: 400px;">
+    <input type="text" name="query" placeholder="Hae viitteitä" value="{{ request.args.get('query', '') }}" style="margin-right: 10px; ">
     <button type="submit">Hae</button>
 </form>
     
@@ -27,10 +28,10 @@ Viitesovellus
         <tbody>
             {% for reference in references %}
             <tr>
-                <td>{{ reference.reftype }}</td>
-                <td>{{ reference.author }}</td>
-                <td>{{ reference.title }}</td>
-                <td>{{ reference.year }}</td>
+                <td>{{ reference.reftype|capitalize }}</td>
+                <td>{{ reference.author if reference.author else 'n.a.' }}</td>
+                <td>{{ reference.title if reference.title else 'n.a.' }}</td>
+                <td>{{ reference.year if reference.year else 'n.d.' }}</td>
                 <td>
                     <button id="toggleButton-{{ reference.id }}" onclick="toggleDetails('details-{{ reference.id }}', 'toggleButton-{{ reference.id }}')">
                         Näytä lisäkentät
@@ -144,13 +145,16 @@ Viitesovellus
 
 {% include "functions/ifmessages.html" %}
 
-<div class="custom_box">
+<div class="custom_box" style="width: 378px; height: 240px;">
     <h4>Tuo viitteen tiedot doi-tunnuksen avulla:</h4>
     <form method="POST" action="/doi_reference" id="doiForm">
         <input type="text" id="doi" name="doi" placeholder="Esim. 10.1109/TC.2021.3063618">
         <button type="submit">Lisää</button>
     </form>
 </div>
+<br>
+<br>
+<br>
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         function toggleDetails(detailsId, buttonId) {
