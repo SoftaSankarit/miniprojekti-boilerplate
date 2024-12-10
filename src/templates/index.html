@@ -14,16 +14,13 @@ Viitesovellus
     <button type="submit">Hae</button>
 </form>
     
-
 {% if references %}
-<p>Viitteet:</p>
     <table>
         <thead>
             <tr>
                 <th>Viitetyyppi</th>
                 <th>Tekijät</th>
                 <th>Teoksen nimi</th>
-                <th>Kustantaja</th>
                 <th>Julkaisuvuosi</th>
             </tr>
         </thead>
@@ -33,11 +30,10 @@ Viitesovellus
                 <td>{{ reference.reftype }}</td>
                 <td>{{ reference.author }}</td>
                 <td>{{ reference.title }}</td>
-                <td>{{ reference.publisher }}</td>
                 <td>{{ reference.year }}</td>
                 <td>
-                    <button onclick="toggleDetails('details-{{ reference.id }}')">
-                        Näytä/Piilota lisätiedot
+                    <button id="toggleButton-{{ reference.id }}" onclick="toggleDetails('details-{{ reference.id }}', 'toggleButton-{{ reference.id }}')">
+                        Näytä lisäkentät
                     </button>
                     <div id="details-{{ reference.id }}" style="display: none; margin-top: 10px;">
                         {% set has_details = false %}
@@ -118,22 +114,32 @@ Viitesovellus
                         {% endif %}
                     </div>
                 </td>
-                <td><button><a href="/edit_entry/reference/{{reference.id}}" style="color:aliceblue">Muokkaa</a></button></td>
-                <td><button><a href="/delete_entry/reference/{{reference.id}}" style="color:aliceblue" onclick="return confirm('Haluatko varmasti poistaa?')" >Poista</a></button></td>
+                <td>
+                    <button>
+                        <a href="/edit_entry/reference/{{reference.id}}" style="color: aliceblue;">Muokkaa</a>
+                    </button>
+                </td>
+                <td>
+                    <button>
+                        <a href="/delete_entry/reference/{{reference.id}}" style="color: aliceblue;" onclick="return confirm('Haluatko varmasti poistaa viitteen?')">Poista</a>
+                    </button>
+                </td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
 {% else %}
-    <p>Ei kirjoja tietokannassa.</p>
+    <p>Ei viitteitä tietokannassa.</p>
 {% endif %}
 </div>
+
 <br></br>
 {% include "buttons/add_reference.html" %}
 <button style="display: inline-block;">
     <a href="/generate_bibtex" style="color: aliceblue;">Luo BibTeX-tiedosto</a>
 </button>
 
+<<<<<<< HEAD
 <br>
 <br>
 
@@ -146,6 +152,25 @@ Viitesovellus
         <button type="submit">Lisää</button>
     </form>
 </div>
+=======
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        function toggleDetails(detailsId, buttonId) {
+            const details = document.getElementById(detailsId);
+            const button = document.getElementById(buttonId);
+            if (details.style.display === "none" || details.style.display === "") {
+                details.style.display = "block";
+                button.textContent = "Piilota lisäkentät";
+            } else {
+                details.style.display = "none";
+                button.textContent = "Näytä lisäkentät";
+            }
+        }
+
+        window.toggleDetails = toggleDetails;
+    });
+</script>
+>>>>>>> origin/css_muutokset
 
 <!-- Scripti joka piilottaa/näyttää lisävalinnat -->
 {% include "functions/show_optional.html" %}
