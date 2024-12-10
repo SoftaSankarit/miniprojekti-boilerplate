@@ -145,7 +145,8 @@ def delete_entry(entry_type,entry_id):
 def edit_entry(entry_type,entry_id):
     reference = get_reference_by_id(entry_id)
     if request.method == "GET":
-        return render_template("edit_reference.html", reference=reference, is_edit=True)
+        template_path = f"editreferencetypes/{entry_type}.html"
+        return render_template("edit_reference.html", reference=reference, is_edit=True, template_path = template_path)
     if request.method == "POST":
         all_options = [
     "author", "title", "publisher", "year", "howpublished",

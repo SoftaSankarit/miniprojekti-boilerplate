@@ -115,16 +115,8 @@ Viitesovellus
                         {% endif %}
                     </div>
                 </td>
-                <td>
-                    <button>
-                        <a href="/edit_entry/reference/{{reference.id}}" style="color: aliceblue;">Muokkaa</a>
-                    </button>
-                </td>
-                <td>
-                    <button>
-                        <a href="/delete_entry/reference/{{reference.id}}" style="color: aliceblue;" onclick="return confirm('Haluatko varmasti poistaa viitteen?')">Poista</a>
-                    </button>
-                </td>
+                <td><button><a href="/edit_entry/{{reference.reftype}}/{{reference.id}}" style="color:aliceblue">Muokkaa</a></button></td>
+                <td><button><a href="/delete_entry/reference/{{reference.id}}" style="color:aliceblue" onclick="return confirm('Haluatko varmasti poistaa?')" >Poista</a></button></td>
             </tr>
             {% endfor %}
         </tbody>
