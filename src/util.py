@@ -91,8 +91,7 @@ def validate_form(reference_type, fields):
     for field in fields:
         value = fields[field]
         # jos kenttä on pakollinen tai jos kenttä on valinnainen ja se on täytetty
-        if field in REFERENCE_FIELDS[reference_type][0] \
-            or field in REFERENCE_FIELDS[reference_type][1] and value is not None:
+        if field in REFERENCE_FIELDS[reference_type][0]:
             if value is None:
                 raise UserInputError("Syöte ei saa olla tyhjä.")
             if field == "year":
