@@ -5,11 +5,11 @@ class UserInputError(Exception):
 REFERENCE_FIELDS = {
     "article": [
         ["author", "title", "journal", "year"],
-        ["volume/number", "pages", "month", "doi", "note", "key"]
+        ["volume", "pages", "month", "doi", "note", "key"]
     ],
     "book": [
         ["author", "title", "publisher", "year"],
-        ["volume/number", "series", "address", "edition", "month", "note", "key", "url"]
+        ["volume", "series", "address", "edition", "month", "note", "key", "url"]
     ],
     "booklet": [
         ["title"],
@@ -17,19 +17,19 @@ REFERENCE_FIELDS = {
     ],
     "conference": [
         ["author", "title", "booktitle", "year"],
-        ["editor", "volume/number", "series", "pages", "address", "month", "organization", "publisher", "note", "key"]
+        ["editor", "volume", "series", "pages", "address", "month", "organization", "publisher", "note", "key", "edition", "chapter"]
     ],
     "inbook": [
-        ["author", "title", "chapter/pages", "publisher", "year"],
-        ["volume/number", "series", "type", "address", "edition", "month", "note", "key"]
+        ["author", "title", "chapter", "publisher", "year"],
+        ["volume", "series", "type", "address", "edition", "month", "note", "key"]
     ],
     "incollection": [
         ["author", "title", "booktitle", "publisher", "year"],
-        ["editor", "volume/number", "series", "type", "chapter", "pages", "address", "edition", "month", "note", "key"]
+        ["editor", "volume", "series", "type", "chapter", "pages", "address", "edition", "month", "note", "key"]
     ],
     "inproceedings": [
         ["author", "title", "booktitle", "year"],
-        ["editor", "volume/number", "series", "pages", "address", "month", "organization", "publisher", "note", "key"]
+        ["editor", "volume", "series", "pages", "address", "month", "organization", "publisher", "note", "key"]
     ],
     "manual": [
         ["title"],
@@ -49,7 +49,7 @@ REFERENCE_FIELDS = {
     ],
     "proceedings": [
         ["title", "year"],
-        ["editor", "volume/number", "series", "address", "month", "publisher", "organization", "note", "key"]
+        ["editor", "volume", "series", "address", "month", "publisher", "organization", "note", "key"]
     ],
     "techreport": [
         ["author", "title", "institution", "year"],
@@ -89,18 +89,22 @@ def validate_doi(doi):
 def validate_form(reference_type, fields):
     print("Virheiden tarkistus")
     for field in fields:
+
         value = fields[field]
-        # jos kenttä on pakollinen tai jos kenttä on valinnainen ja se on täytetty
-        if field in REFERENCE_FIELDS[reference_type][0]:
+        if field in REFERENCE_FIELDS[reference_type][0] or REFERENCE_FIELDS[reference_type][1]:
+
             if value is None:
                 raise UserInputError("Syöte ei saa olla tyhjä.")
-            if field == "year":
+
+            if field == "year" and value != "":
                 validate_year(value)
-            elif field in ["author", "title", "publisher", "institution", "journal",
-                           "organization", "school", "series", "issue", "edition", 
-                           "chapter", "key", "note", "misc_details"]:
+            if field in [
+                "author", "title", "publisher", "institution", "journal",
+                "organization", "school", "series", "issue", "edition",
+                "chapter", "key", "note", "misc_details"
+            ] and value != "":
                 validate_text_field(value)
-            elif field == "doi":
+            if field == "doi" and value != "":
                 validate_doi(value)
 
 
@@ -137,14 +141,13 @@ def fill_doi_fields(reference_type, data):
         elif field == "title" and "title" in data:
             filled_fields[field] = data["title"][0]
 
-        elif field == "volume/number" and "volume" in data:
+        elif field == "volume" and "volume" in data:
             filled_fields[field] = data["volume"]
 
         elif field == "year" and "license" in data and data["license"]:
             license_date = data["license"][0].get("start", {}).get("date-parts", [[None, None, None]])[0]
             filled_fields["year"] = license_date[0]
             filled_fields["month"] = license_date[1]
-            filled_fields["day"] = license_date[2]
 
         elif field == "journal" and "container-title" in data:
             filled_fields[field] = data["container-title"][0]

@@ -64,3 +64,35 @@ class TestValidateForm(unittest.TestCase):
         with self.assertRaises(UserInputError) as context:
             validate_form("book", fields)
         self.assertEqual(str(context.exception), "Syötteen pitää olla pidempi kuin 3 merkkiä.")
+
+    def test_validate_form_success_doi(self):
+        fields = {
+            "author": "Valid Author",
+            "title": "Valid Title",
+            "journal": "Valid Journal",
+            "year": "2020",
+            "doi": "10.1234/example",
+        }
+        validate_form("article", fields)
+
+
+    def test_validate_form_invalid_doi(self):
+        fields = {
+            "author": "Valid Author",
+            "title": "Valid Title",
+            "journal": "Valid Journal",
+            "year": "2020",
+            "doi": "invalid_doi",
+        }
+        with self.assertRaises(UserInputError) as context:
+            validate_form("article", fields)
+        self.assertEqual(str(context.exception), "DOI:n pitää alkaa '10.'.")
+
+    def test_validate_form_no_doi(self):
+        fields = {
+            "author": "Valid Author",
+            "title": "Valid Title",
+            "year": "2020",
+            "journal": "Valid Journal",
+        }
+        validate_form("article", fields)

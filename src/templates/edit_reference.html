@@ -5,16 +5,14 @@ Viitesovellus
 {% endblock %}
 
 {% block body %}
-
-<div class="form-container">
+<div class="custom_box" style="width: 650px;">
   <form method="POST" action='/edit_entry/{{reference.reftype}}/{{ reference.id }}' id="editForm">
     {% include template_path %}
     <button type="button" id="toggleOptionalFields">Näytä lisäkentät</button>
     <button type="submit">Tallenna muutokset</button>
   </form>
 </div>
-<br>
-<p><button><a href="/" style="color:aliceblue">Takaisin</a></button></p>
+<p><a href="/" class="button-link">Takaisin</a></p>
 <script>
   const toggleButton = document.getElementById('toggleOptionalFields');
   const optionalFields = document.getElementById('optionalFields');

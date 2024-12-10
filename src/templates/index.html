@@ -7,7 +7,10 @@ Viitesovellus
 {% block body %}
 <br>
 <br>
-<h1>Viitesovellus</h1>
+
+<img src="static/viitex.png" width="350" >
+<br>
+
 <div class="custom_box">   
 
 <form method="GET" action="/" style="display: flex; align-items: center; width: 400px;">
@@ -21,8 +24,11 @@ Viitesovellus
             <tr>
                 <th>Viitetyyppi</th>
                 <th>Tekijät</th>
-                <th>Teoksen nimi</th>
+                <th>Otsikko</th>
                 <th>Julkaisuvuosi</th>
+                <th style="text-align: center;">Lisäkentät</th>
+                <th style="text-align: center;">Muokkaa</th>
+                <th style="text-align: center;">Poista</th>
             </tr>
         </thead>
         <tbody>
@@ -126,25 +132,28 @@ Viitesovellus
     <p>Ei viitteitä tietokannassa.</p>
 {% endif %}
 </div>
-
-<br></br>
-{% include "buttons/add_reference.html" %}
-<button style="display: inline-block;">
-    <a href="/generate_bibtex" style="color: aliceblue;">Luo BibTeX-tiedosto</a>
-</button>
-
-<br>
 <br>
 
 {% include "functions/ifmessages.html" %}
 
-<div class="custom_box" style="width: 378px; height: 240px;">
-    <h4>Tuo viitteen tiedot doi-tunnuksen avulla:</h4>
-    <form method="POST" action="/doi_reference" id="doiForm">
-        <input type="text" id="doi" name="doi" placeholder="Esim. 10.1109/TC.2021.3063618">
-        <button type="submit">Lisää</button>
-    </form>
+<div class="button-container" style="display: inline-block;">
+    <div class="custom_box" style="width: 378px; height: 240px; display: inline-block; vertical-align: top;">
+        <h4>Tuo viitteen tiedot doi-tunnuksen avulla:</h4>
+        <form method="POST" action="/doi_reference" id="doiForm">
+            <input type="text" id="doi" name="doi" placeholder="Esim. 10.1109/TC.2021.3063618">
+            <button type="submit">Lisää</button>
+        </form>
+    </div>
+
+    <div style="display: inline-block; margin-left: 20px; vertical-align: top; padding-top: 20px;">
+        {% include "buttons/add_reference.html" %}
+    </div>
+
+    <div style="display: inline-block; margin-left: 20px; vertical-align: top; padding-top: 20px;">
+        <a class="button-link" href="/generate_bibtex">Luo BibTeX-tiedosto</a>
+    </div>
 </div>
+
 <br>
 <br>
 <br>

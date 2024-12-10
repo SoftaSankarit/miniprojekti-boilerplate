@@ -45,8 +45,6 @@ def reference_creation():
         if value:
             filled_fields[field] = value
 
-    print(reftype)
-
     try:
         validate_form(reftype, filled_fields)
         create_reference(filled_fields, reftype)

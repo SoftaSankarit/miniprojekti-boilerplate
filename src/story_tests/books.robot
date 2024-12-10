@@ -23,9 +23,9 @@ After adding a book, there is one
     Click Button  Lisää
     Page Should Contain  Viitetyyppi
     Page Should Contain  Tekijät
-    Page Should Contain  Teoksen nimi
+    Page Should Contain  Otsikko
     Page Should Contain  Julkaisuvuosi
-    Page Should Contain  book
+    Page Should Contain  Book
     Page Should Contain  Erkki Esimerkki
     Page Should Contain  Otsikko
     Page Should Contain  2024
@@ -62,9 +62,9 @@ After editing book values change
     Click Button  Tallenna muutokset
     Page Should Contain  Viitetyyppi
     Page Should Contain  Tekijät
-    Page Should Contain  Teoksen nimi
+    Page Should Contain  Otsikko
     Page Should Contain  Julkaisuvuosi
-    Page Should Contain  book
+    Page Should Contain  Book
     Page Should Contain  Erkki Esimerkki
     Page Should Contain  Otsikko
     Page Should Contain  2019
