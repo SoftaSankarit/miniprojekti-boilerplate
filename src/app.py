@@ -73,11 +73,10 @@ def doi_reference():
     reference_type = find_crossref_type(doi_data)
     prefilled_data = fill_doi_fields(reference_type, doi_data)
 
-    create_reference(prefilled_data, reference_type)
     try:
         validate_form(reference_type, prefilled_data)
-        create_reference(prefilled_data, reference_type)
-        return redirect("/")
+        reference = create_reference(prefilled_data, reference_type)
+        return render_template("edit_reference.html", reference=reference)
     except Exception as error:
         flash(str(error))
         return redirect(f"/new_reference/{reference_type}")
