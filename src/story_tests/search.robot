@@ -29,9 +29,9 @@ After search it only shows references that have the searchword in them
     Click Button  Hae
     Page Should Contain  Viitetyyppi
     Page Should Contain  Tekijät
-    Page Should Contain  Teoksen nimi
+    Page Should Contain  Otsikko
     Page Should Contain  Julkaisuvuosi
-    Page Should Contain  book
+    Page Should Contain  Book
     Page Should Contain  Maija Meikäläinen
     Page Should Contain  Haku testauksen alkeet
     Page Should Contain  2019

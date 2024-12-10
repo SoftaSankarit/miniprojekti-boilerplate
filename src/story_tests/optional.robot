@@ -22,9 +22,9 @@ After adding optional info, there is
     Click Button  Näytä lisäkentät
     Page Should Contain  Viitetyyppi
     Page Should Contain  Tekijät
-    Page Should Contain  Teoksen nimi
+    Page Should Contain  Otsikko
     Page Should Contain  Julkaisuvuosi
-    Page Should Contain  book
+    Page Should Contain  Book
     Page Should Contain  Erkki Esimerkki
     Page Should Contain  Otsikko
     Page Should Contain  2024
