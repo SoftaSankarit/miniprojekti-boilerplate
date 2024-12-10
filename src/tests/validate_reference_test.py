@@ -30,7 +30,7 @@ class TestReferenceValidation(unittest.TestCase):
     def test_too_short_textfield_raises_error(self):
         with self.assertRaises(UserInputError):
             validate_text_field("a")
-    
+
     def test_valid_doi_does_not_raise_error(self):
         validate_doi("10.1234/example.doi")
 
@@ -39,5 +39,3 @@ class TestReferenceValidation(unittest.TestCase):
             validate_doi("example.doi")
         with self.assertRaises(UserInputError):
             validate_doi("10." + "a" * 256)
-
-

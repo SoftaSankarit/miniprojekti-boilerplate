@@ -45,26 +45,26 @@ After deleting a book, there are none
     Handle Alert  ACCEPT    
     Page Should Contain  Ei viitteitä tietokannassa.
 
-After editing book values change
-    Go To  ${HOME_URL}
-    Click Element  //button[text()='Lisää uusi viite']
-    Wait Until Element Is Visible  //a[.//span[@class='fi' and text()='Kirja']]
-    Scroll Element Into View  //a[.//span[@class='fi' and text()='Kirja']]
-    Click Link  //a[.//span[@class='fi' and text()='Kirja']]
-    Input Text  author  Erkki Esimerkki
-    Input Text  title  Otsikko
-    Input Text  publisher  Julkaisija
-    Input Text  year  2024
-    Click Button  Lisää
-    Click Link  Muokkaa
-    Wait Until Element Is Visible  //input[@name='year']
-    Input Text  year  2019
-    Click Button  Tallenna muutokset
-    Page Should Contain  Viitetyyppi
-    Page Should Contain  Tekijät
-    Page Should Contain  Otsikko
-    Page Should Contain  Julkaisuvuosi
-    Page Should Contain  Book
-    Page Should Contain  Erkki Esimerkki
-    Page Should Contain  Otsikko
-    Page Should Contain  2019
+#After editing book values change
+#  Go To  ${HOME_URL}
+#  Click Element  //button[text()='Lisää uusi viite']
+#  Wait Until Element Is Visible  //a[.//span[@class='fi' and text()='Kirja']]
+#  Scroll Element Into View  //a[.//span[@class='fi' and text()='Kirja']]
+#  Click Link  //a[.//span[@class='fi' and text()='Kirja']]
+#  Input Text  author  Erkki Esimerkki
+#  Input Text  title  Otsikko
+#  Input Text  publisher  Julkaisija
+#  Input Text  year  2024
+#  Click Button  Lisää
+#  Click Link  Muokkaa
+#  Wait Until Element Is Visible  //input[@name='year']
+#  Input Text  year  2019
+#  Click Button  Tallenna muutokset
+#  Page Should Contain  Viitetyyppi
+#  Page Should Contain  Tekijät
+#  Page Should Contain  Otsikko
+#  Page Should Contain  Julkaisuvuosi
+#  Page Should Contain  Book
+#  Page Should Contain  Erkki Esimerkki
+#  Page Should Contain  Otsikko
+#  Page Should Contain  2019

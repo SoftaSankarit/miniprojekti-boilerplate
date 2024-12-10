@@ -12,7 +12,7 @@ class TestFindCrossrefType(unittest.TestCase):
 
     def test_missing_type_key(self):
         self.assertEqual(find_crossref_type({}), None)
-    
+
 class TestFillDoiFields(unittest.TestCase):
     def setUp(self):
         self.sample_data = {
@@ -32,7 +32,7 @@ class TestFillDoiFields(unittest.TestCase):
         filled = fill_doi_fields("article", self.sample_data)
         self.assertEqual(filled["author"], "John Doe, et al.")
         self.assertEqual(filled["title"], "Sample Title")
-        self.assertEqual(filled["volume/number"], "42")
+        self.assertEqual(filled["volume"], "42")
         self.assertEqual(filled["year"], 2023)
         self.assertEqual(filled["month"], 5)
         self.assertEqual(filled["journal"], "Sample Journal")

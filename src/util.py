@@ -20,7 +20,7 @@ REFERENCE_FIELDS = {
         ["editor", "volume", "series", "pages", "address", "month", "organization", "publisher", "note", "key", "edition", "chapter"]
     ],
     "inbook": [
-        ["author", "title", "chapter/pages", "publisher", "year"],
+        ["author", "title", "chapter", "publisher", "year"],
         ["volume", "series", "type", "address", "edition", "month", "note", "key"]
     ],
     "incollection": [
@@ -88,20 +88,14 @@ def validate_doi(doi):
 
 def validate_form(reference_type, fields):
     print("Virheiden tarkistus")
-    valid_fields = REFERENCE_FIELDS[reference_type][0] + REFERENCE_FIELDS[reference_type][1]
-
     for field in fields:
-        if field not in valid_fields:
-           raise UserInputError(f"Field '{field}' is not valid for reference type '{reference_type}'.")
 
         value = fields[field]
         if field in REFERENCE_FIELDS[reference_type][0] or REFERENCE_FIELDS[reference_type][1]:
-            print(field)
-            print(value)
 
             if value is None:
                 raise UserInputError("Syöte ei saa olla tyhjä.")
-            
+
             if field == "year" and value != "":
                 validate_year(value)
             if field in [
@@ -147,7 +141,7 @@ def fill_doi_fields(reference_type, data):
         elif field == "title" and "title" in data:
             filled_fields[field] = data["title"][0]
 
-        elif field == "volume/number" and "volume" in data:
+        elif field == "volume" and "volume" in data:
             filled_fields[field] = data["volume"]
 
         elif field == "year" and "license" in data and data["license"]:

@@ -64,7 +64,7 @@ class TestValidateForm(unittest.TestCase):
         with self.assertRaises(UserInputError) as context:
             validate_form("book", fields)
         self.assertEqual(str(context.exception), "Syötteen pitää olla pidempi kuin 3 merkkiä.")
-    
+
     def test_validate_form_success_doi(self):
         fields = {
             "author": "Valid Author",
@@ -88,18 +88,6 @@ class TestValidateForm(unittest.TestCase):
             validate_form("article", fields)
         self.assertEqual(str(context.exception), "DOI:n pitää alkaa '10.'.")
 
-    def test_validate_form_invalid_field(self):
-        fields = {
-            "author": "Valid Author",
-            "invalid_field": "Some Value",
-        }
-        with self.assertRaises(UserInputError) as context:
-            validate_form("article", fields)
-        self.assertEqual(
-            str(context.exception),
-            "Field 'invalid_field' is not valid for reference type 'article'."
-        )
-        
     def test_validate_form_no_doi(self):
         fields = {
             "author": "Valid Author",
@@ -108,7 +96,3 @@ class TestValidateForm(unittest.TestCase):
             "journal": "Valid Journal",
         }
         validate_form("article", fields)
-
-
-
-
