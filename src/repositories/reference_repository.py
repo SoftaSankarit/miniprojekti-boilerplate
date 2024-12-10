@@ -22,21 +22,21 @@ def create_reference(optionals, reftype):
     return new_reference
 
 
-def delete_reference(id): # pylint: disable=invalid-name
-    References.query.filter_by(id=id).delete() # pylint: disable=invalid-name
+def delete_reference(id):
+    References.query.filter_by(id=id).delete()
     db.session.commit()
 
-def edit_reference(id, optionals): # pylint: disable=invalid-name
-    reference = get_reference_by_id(id) # pylint: disable=invalid-name
-    reference.id = id # pylint: disable=invalid-name
+def edit_reference(id, optionals):
+    reference = get_reference_by_id(id)
+    reference.id = id
     for field, value in optionals.items():
         if value:
             setattr(reference, field, value)
     db.session.commit()
 
 
-def get_reference_by_id(id): # pylint: disable=invalid-name
-    return References.query.get(id) # pylint: disable=invalid-name
+def get_reference_by_id(id):
+    return References.query.get(id)
 
 def search_references(query):
     search_term = f"%{query}%"

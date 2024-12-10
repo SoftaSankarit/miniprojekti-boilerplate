@@ -8,7 +8,6 @@ from repositories.reference_repository \
     import get_references, get_reference_by_id, create_reference, delete_reference, edit_reference, search_references
 from config import app, test_env
 from util import validate_form, find_crossref_type, fill_doi_fields
-#, REFERENCE_FIELDS
 
 # Lataa nykyiset kirjat alkunäytölle
 @app.route("/")
@@ -81,26 +80,12 @@ def doi_reference():
         flash(str(error))
         return redirect(f"/new_reference/{reference_type}")
 
-# en saanu toimimaan versiota missä esitäytettyä lomaketta vois muokata ennen viitteen luontia:
-    # return render_template("new_doi_reference.html",
-    #                        form_data=prefilled_data,
-    #                        reference_type=reference_type,
-    #                        reference_fields=REFERENCE_FIELDS
-    #                        )
-
 
 # Luo txt-muotoisen tiedoston, jossa ovat kaikki kirjat BibTeX muodossa
 @app.route("/generate_bibtex")
 def generate_bibtex():
     references = get_references()
     db_bib = BibDatabase()
-
-    # def generate_book_id(reference):
-    #     author_last_name = reference.author.split(" ")[-1]
-    #     title = reference.title.split(" ")[0]
-    #     year = reference.year
-    #     reference_id = author_last_name + title + year
-    #     return reference_id
 
     def generate_reference_id(reference):
         if reference.author:
