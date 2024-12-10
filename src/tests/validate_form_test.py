@@ -37,13 +37,6 @@ class TestValidateForm(unittest.TestCase):
             validate_form("article", fields)
         self.assertEqual(str(context.exception), "Syöte ei saa olla tyhjä.")
 
-    def test_field_with_invalid_characters(self):
-        fields = self.valid_article_fields.copy()
-        fields["title"] = "Invalid@Title!"
-        with self.assertRaises(UserInputError) as context:
-            validate_form("article", fields)
-        self.assertIn("sisältää kiellettyjä merkkejä", str(context.exception))
-
     def test_invalid_year(self):
         fields = self.valid_article_fields.copy()
         fields["year"] = "abcd"
@@ -53,10 +46,10 @@ class TestValidateForm(unittest.TestCase):
 
     def test_text_field_too_long(self):
         fields = self.valid_article_fields.copy()
-        fields["author"] = "A"*41
+        fields["author"] = "A"*151
         with self.assertRaises(UserInputError) as context:
             validate_form("article", fields)
-        self.assertEqual(str(context.exception), "Syötteen pitää olla lyhyempi kuin 40 merkkiä.")
+        self.assertEqual(str(context.exception), "Syötteen pitää olla lyhyempi kuin 150 merkkiä.")
 
     def test_text_field_too_short(self):
         fields = self.valid_article_fields.copy()

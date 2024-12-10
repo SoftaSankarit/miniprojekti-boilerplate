@@ -73,10 +73,10 @@ def validate_year(year):
 
 
 def validate_text_field(text):
-    if len(text) > 150:
-        raise UserInputError("Syötteen pitää olla lyhyempi kuin 150 merkkiä.")
     if len(text) < 3:
         raise UserInputError("Syötteen pitää olla pidempi kuin 3 merkkiä.")
+    if len(text) > 150:
+        raise UserInputError("Syötteen pitää olla lyhyempi kuin 150 merkkiä.")
 
 
 def validate_doi(doi):

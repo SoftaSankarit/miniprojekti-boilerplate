@@ -22,9 +22,12 @@ class TestReferenceValidation(unittest.TestCase):
     def test_valid_text_does_not_raise_error(self):
         validate_text_field("Toimiva teksti")
 
-    def test_too_short_or_long_textfield_raises_error(self):
+    def test_too_long_textfield_raises_error(self):
+        long_text = "a" * 151
         with self.assertRaises(UserInputError):
-            validate_text_field("M")
+            validate_text_field(long_text)
 
+
+    def test_too_short_textfield_raises_error(self):
         with self.assertRaises(UserInputError):
-            validate_text_field("Todellaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa pitkä teksti")
+            validate_text_field("a")
