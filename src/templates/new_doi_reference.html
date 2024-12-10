@@ -8,7 +8,7 @@ Viitesovellus
 {% block body %}
 {% include "functions/ifmessages.html" %}
 
-<div class="form-container">
+<div class="custom_box" style="width: 650px;">
   <form method="POST" action="/create_reference" id="doireferenceForm">
     <input type="hidden" name="reftype" value="{{ reference_type }}">
     {% if reference_type in reference_fields %}
