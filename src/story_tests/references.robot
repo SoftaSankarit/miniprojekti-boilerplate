@@ -47,8 +47,8 @@ After adding multiple types of references, they all show
     Input Text  year  2024
     Click Button  Lisää
 
-    Page Should Contain  book
-    Page Should Contain  conference
-    Page Should Contain  article
-    Page Should Contain  phdthesis
+    Page Should Contain  Book
+    Page Should Contain  Conference
+    Page Should Contain  Article
+    Page Should Contain  Phdthesis
     

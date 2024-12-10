@@ -9,9 +9,9 @@ After adding DOI there is the wanted citation
     Go To  ${HOME_URL}
     Input Text  doi  10.1038/nature12373
     Click Element  //button[text()="Lisää"]
-    Click Button  Tallenna muutokset
+    Click Button  Lisää
     Click Button  Näytä lisäkentät
-    Page Should Contain  article
+    Page Should Contain  Article
     Page Should Contain  G. Kucsko, et al.
     Page Should Contain  Nanometre-scale thermometry in a living cell
     Page Should Contain  2013
