@@ -79,11 +79,11 @@ input {
   background-color: #ddd;
 }
 
-.dropdown-columns {
+/* .dropdown-columns {
   display: grid;
   grid-template-columns: 50% 50%;
   gap: 10px;
-}
+} */
 
 .dropdown-content a span {
   display: block;
