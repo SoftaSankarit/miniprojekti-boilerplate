@@ -40,8 +40,31 @@ def get_reference_by_id(id): # pylint: disable=invalid-name
 def search_references(query):
     search_term = f"%{query}%"
     return References.query.filter(
+        (References.reftype.ilike(search_term)) |
         (References.author.ilike(search_term)) |
         (References.title.ilike(search_term)) |
         (References.publisher.ilike(search_term)) |
-        (cast(References.year, String).ilike(search_term))
+        (cast(References.year, String).ilike(search_term)) |
+        (References.howpublished.ilike(search_term)) |
+        (References.institution.ilike(search_term)) |
+        (References.journal.ilike(search_term)) |
+        (References.volume.ilike(search_term)) |
+        (References.address.ilike(search_term)) |
+        (cast(References.number, String).ilike(search_term)) |
+        (References.organization.ilike(search_term)) |
+        (References.school.ilike(search_term)) |
+        (References.series.ilike(search_term)) |
+        (References.issue.ilike(search_term)) |
+        (References.edition.ilike(search_term)) |
+        (References.chapter.ilike(search_term)) |
+        (References.pages.ilike(search_term)) |
+        (References.url.ilike(search_term)) |
+        (References.key.ilike(search_term)) |
+        (References.month.ilike(search_term)) |
+        (References.note.ilike(search_term)) |
+        (References.misc_details.ilike(search_term)) |
+        (References.doi.ilike(search_term)) |
+        (References.booktitle.ilike(search_term)) |
+        (References.editor.ilike(search_term)) |
+        (References.type.ilike(search_term))
     ).all()
