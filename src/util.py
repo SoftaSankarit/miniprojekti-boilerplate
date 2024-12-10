@@ -88,19 +88,29 @@ def validate_doi(doi):
 
 def validate_form(reference_type, fields):
     print("Virheiden tarkistus")
+    valid_fields = REFERENCE_FIELDS[reference_type][0] + REFERENCE_FIELDS[reference_type][1]
+
     for field in fields:
+        if field not in valid_fields:
+           raise UserInputError(f"Field '{field}' is not valid for reference type '{reference_type}'.")
+
         value = fields[field]
-        # jos kenttä on pakollinen tai jos kenttä on valinnainen ja se on täytetty
-        if field in REFERENCE_FIELDS[reference_type][0]:
+        if field in REFERENCE_FIELDS[reference_type][0] or REFERENCE_FIELDS[reference_type][1]:
+            print(field)
+            print(value)
+
             if value is None:
                 raise UserInputError("Syöte ei saa olla tyhjä.")
+            
             if field == "year":
                 validate_year(value)
-            elif field in ["author", "title", "publisher", "institution", "journal",
-                           "organization", "school", "series", "issue", "edition", 
-                           "chapter", "key", "note", "misc_details"]:
+            if field in [
+                "author", "title", "publisher", "institution", "journal",
+                "organization", "school", "series", "issue", "edition",
+                "chapter", "key", "note", "misc_details"
+            ] and value != "":
                 validate_text_field(value)
-            elif field == "doi":
+            if field == "doi":
                 validate_doi(value)
 
 
@@ -144,7 +154,6 @@ def fill_doi_fields(reference_type, data):
             license_date = data["license"][0].get("start", {}).get("date-parts", [[None, None, None]])[0]
             filled_fields["year"] = license_date[0]
             filled_fields["month"] = license_date[1]
-            filled_fields["day"] = license_date[2]
 
         elif field == "journal" and "container-title" in data:
             filled_fields[field] = data["container-title"][0]

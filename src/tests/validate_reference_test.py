@@ -1,5 +1,5 @@
 import unittest
-from util import validate_year, validate_text_field, UserInputError
+from util import validate_year, validate_text_field, validate_doi, UserInputError
 
 class TestReferenceValidation(unittest.TestCase):
     def setUp(self):
@@ -27,7 +27,17 @@ class TestReferenceValidation(unittest.TestCase):
         with self.assertRaises(UserInputError):
             validate_text_field(long_text)
 
-
     def test_too_short_textfield_raises_error(self):
         with self.assertRaises(UserInputError):
             validate_text_field("a")
+    
+    def test_valid_doi_does_not_raise_error(self):
+        validate_doi("10.1234/example.doi")
+
+    def test_invalid_doi(self):
+        with self.assertRaises(UserInputError):
+            validate_doi("example.doi")
+        with self.assertRaises(UserInputError):
+            validate_doi("10." + "a" * 256)
+
+
