@@ -8,8 +8,8 @@ Test Setup       Reset Todos
 After search it only shows references that have the searchword in them
     Go To  ${HOME_URL}
     Click Element  //button[text()='Lisää uusi viite']
-    Wait Until Element Is Visible  //a[.//span[@class='fi' and text()='Kirja']]
     Scroll Element Into View  //a[.//span[@class='fi' and text()='Kirja']]
+    Wait Until Element Is Visible  //a[.//span[@class='fi' and text()='Kirja']]
     Click Link  //a[.//span[@class='fi' and text()='Kirja']]
     Input Text  author  Erkki Esimerkki
     Input Text  title  Otsikko
@@ -17,8 +17,8 @@ After search it only shows references that have the searchword in them
     Input Text  year  2024
     Click Button  Lisää
     Click Element  //button[text()='Lisää uusi viite']
-    Wait Until Element Is Visible  //a[.//span[@class='fi' and text()='Kirja']]
     Scroll Element Into View  //a[.//span[@class='fi' and text()='Kirja']]
+    Wait Until Element Is Visible  //a[.//span[@class='fi' and text()='Kirja']]
     Click Link  //a[.//span[@class='fi' and text()='Kirja']]
     Input Text  author  Maija Meikäläinen
     Input Text  title  Haku testauksen alkeet 

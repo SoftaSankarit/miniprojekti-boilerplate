@@ -8,8 +8,8 @@ Test Setup       Reset Todos
 After adding multiple types of references, they all show
     Go To  ${HOME_URL}
     Click Element  //button[text()='Lisää uusi viite']
-    Wait Until Element Is Visible  //a[.//span[@class='fi' and text()='Kirja']]
     Scroll Element Into View  //a[.//span[@class='fi' and text()='Kirja']]
+    Wait Until Element Is Visible  //a[.//span[@class='fi' and text()='Kirja']]
     Click Link  //a[.//span[@class='fi' and text()='Kirja']]
     Input Text  author  Erkki Esimerkki
     Input Text  title  Hyvä Kirjan Nimi
@@ -18,8 +18,8 @@ After adding multiple types of references, they all show
     Click Button  Lisää
 
     Click Element  //button[text()='Lisää uusi viite']
-    Wait Until Element Is Visible  //a[.//span[@class='fi' and text()='Artikkeli']]
     Scroll Element Into View  //a[.//span[@class='fi' and text()='Artikkeli']]
+    Wait Until Element Is Visible  //a[.//span[@class='fi' and text()='Artikkeli']]
     Click Link  //a[.//span[@class='fi' and text()='Artikkeli']]
     Input Text  author  Arti Artikkeli
     Input Text  title  Hyvä Artikkelin nimi
@@ -28,8 +28,8 @@ After adding multiple types of references, they all show
     Click Button  Lisää
 
     Click Element  //button[text()='Lisää uusi viite']
-    Wait Until Element Is Visible  //a[.//span[@class='fi' and text()='Konferenssi']]
     Scroll Element Into View  //a[.//span[@class='fi' and text()='Konferenssi']]
+    Wait Until Element Is Visible  //a[.//span[@class='fi' and text()='Konferenssi']]
     Click Link  //a[.//span[@class='fi' and text()='Konferenssi']]
     Input Text  author  Konfe Konferenssi
     Input Text  title  Hyvä Konferenssin nimi
@@ -38,8 +38,8 @@ After adding multiple types of references, they all show
     Click Button  Lisää
 
     Click Element  //button[text()='Lisää uusi viite']
-    Wait Until Element Is Visible  //a[.//span[@class='fi' and text()='Väitöskirja']]
     Scroll Element Into View  //a[.//span[@class='fi' and text()='Väitöskirja']]
+    Wait Until Element Is Visible  //a[.//span[@class='fi' and text()='Väitöskirja']]
     Click Link  //a[.//span[@class='fi' and text()='Väitöskirja']]
     Input Text  author  Väinö Väitöskirja
     Input Text  title  Väitöskirjan Ohjelmoinnista

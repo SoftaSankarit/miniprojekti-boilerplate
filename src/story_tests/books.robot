@@ -7,14 +7,14 @@ Test Setup       Reset Todos
 *** Test Cases ***
 At the start there are no books
     Go To  ${HOME_URL}
-    Title Should Be  Viitesovellus
+    Title Should Be  ViiTeX
     Page Should Contain  Ei viitteitä tietokannassa.
 
 After adding a book, there is one
     Go To  ${HOME_URL}
     Click Element  //button[text()='Lisää uusi viite']
-    Wait Until Element Is Visible  //a[.//span[@class='fi' and text()='Kirja']]
     Scroll Element Into View  //a[.//span[@class='fi' and text()='Kirja']]
+    Wait Until Element Is Visible  //a[.//span[@class='fi' and text()='Kirja']]
     Click Link  //a[.//span[@class='fi' and text()='Kirja']]
     Input Text  author  Erkki Esimerkki
     Input Text  title  Otsikko
@@ -33,8 +33,8 @@ After adding a book, there is one
 After deleting a book, there are none
     Go To  ${HOME_URL}
     Click Element  //button[text()='Lisää uusi viite']
-    Wait Until Element Is Visible  //a[.//span[@class='fi' and text()='Kirja']]
     Scroll Element Into View  //a[.//span[@class='fi' and text()='Kirja']]
+    Wait Until Element Is Visible  //a[.//span[@class='fi' and text()='Kirja']]
     Click Link  //a[.//span[@class='fi' and text()='Kirja']]
     Input Text  author  Erkki Esimerkki
     Input Text  title  Otsikko
@@ -48,8 +48,8 @@ After deleting a book, there are none
 After editing book values change
     Go To  ${HOME_URL}
     Click Element  //button[text()='Lisää uusi viite']
-    Wait Until Element Is Visible  //a[.//span[@class='fi' and text()='Kirja']]
     Scroll Element Into View  //a[.//span[@class='fi' and text()='Kirja']]
+    Wait Until Element Is Visible  //a[.//span[@class='fi' and text()='Kirja']]
     Click Link  //a[.//span[@class='fi' and text()='Kirja']]
     Input Text  author  Erkki Esimerkki
     Input Text  title  Otsikko
