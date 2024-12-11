@@ -121,9 +121,9 @@ Viitesovellus
                         {% endif %}
                     </div>
                 </td>
-                <td><button onclick="location.href='/edit_entry/{{reference.reftype}}/{{reference.id}}'" style="color:aliceblue">Muokkaa</button></td>
+                <td><button style="color:aliceblue"><a href="/edit_entry/{{reference.reftype}}/{{reference.id}}"></a>Muokkaa</button></td>
                 
-                <td><button style="color:aliceblue" onclick="if (confirm('Haluatko varmasti poistaa?')) location.href='/delete_entry/reference/{{reference.id}}';" >Poista</button></td>
+                <td><button style="color:aliceblue" onclick="if (confirm('Haluatko varmasti poistaa?'))"><a href="/delete_entry/reference/{{reference.id}}" >Poista</button></td>
             </tr>
             {% endfor %}
         </tbody>

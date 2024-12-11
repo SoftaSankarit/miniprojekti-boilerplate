@@ -26,8 +26,8 @@ def index():
 def new_reference(reference_type):
     if reference_type not in REFERENCE_FIELDS:
         return render_template("error.html", error="Sivua ei löytynyt.")
-    return render_template("new_reference.html", 
-                           reference_type=reference_type, 
+    return render_template("new_reference.html",
+                           reference_type=reference_type,
                            reference_fields=REFERENCE_FIELDS)
 
 
@@ -86,7 +86,7 @@ def doi_reference():
                             )
     except Exception as error:
         flash(str(error))
-        return redirect(f"/#doiForm")
+        return redirect("/#doiForm")
 
 
 # Luo txt-muotoisen tiedoston, jossa ovat kaikki kirjat BibTeX muodossa
