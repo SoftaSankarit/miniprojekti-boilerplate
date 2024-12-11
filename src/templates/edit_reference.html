@@ -5,6 +5,9 @@ ViiTeX
 {% endblock %}
 
 {% block body %}
+<br>
+<br>
+
 <div class="custom_box" style="width: 650px;">
   <form method="POST" action='/edit_entry/{{reference.reftype}}/{{ reference.id }}' id="editForm">
     {% include template_path %}

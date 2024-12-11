@@ -124,7 +124,10 @@ ViiTeX
                     <a href="/edit_entry/{{reference.reftype}}/{{reference.id}}" class="button-link">Muokkaa</a>
                 </td>
                 <td>
-                    <a href="/delete_entry/reference/{{reference.id}}" class="button-link" onclick="return confirm('Haluatko varmasti poistaa viitteen?')">Poista</a>
+                    <a href="/delete_entry/reference/{{reference.id}}" class="button-link" style="background-color: #fc3939; color: #ffffff;" 
+                    onmouseover="this.style.backgroundColor='#d73a3a'; this.style.color='#000000';" 
+                    onmouseout="this.style.backgroundColor='#fe5858'; this.style.color='#ffffff';"
+                    onclick="return confirm('Haluatko varmasti poistaa viitteen?')">Poista</a>
                 </td>
             </tr>
             {% endfor %}
