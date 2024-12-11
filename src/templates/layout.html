@@ -2,12 +2,14 @@
 <html lang="en">
   <head>
     <link rel="shortcut icon" href="{{ url_for('static', filename='pulu.png') }}">
+    <center><img src="{{ url_for('static', filename='viitex.png') }}" width="350"></center>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="{{ url_for('static', filename='milligram.css') }}"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <title>{% block title %}{% endblock %}</title>
 </head>
   <body>
+    
     <center> 
   {% block body %}{% endblock %}
     </center>
