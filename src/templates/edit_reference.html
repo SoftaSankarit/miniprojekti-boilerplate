@@ -7,14 +7,39 @@ ViiTeX
 {% block body %}
 <br>
 <br>
+{% include "functions/ifmessages.html" %}
 
 <div class="custom_box" style="width: 650px;">
-  <form method="POST" action='/edit_entry/{{reference.reftype}}/{{ reference.id }}' id="editForm">
-    {% include template_path %}
-    <button type="button" id="toggleOptionalFields">Näytä lisäkentät</button>
-    <button type="submit">Tallenna muutokset</button>
+  <form method="POST" action="/edit_entry/{{ reference_type }}/{{ form_data.id }}" id="editForm">
+    <input type="hidden" name="reftype" value="{{ reference_type }}">
+    {% if reference_type in reference_fields %}
+        <!-- Pakolliset kentät -->
+        {% for field in reference_fields[reference_type][0] %}
+        <label for="{{ field }}">{{ finnish_fields.get(field, field) | capitalize }}:</label>
+        <input type="text" 
+               id="{{ field }}" 
+               name="{{ field }}" 
+               value="{{ form_data[field] if form_data[field] else '' }}" 
+               placeholder="Pakollinen tieto">
+        {% endfor %}
+        <!-- Valinnaiset kentät -->
+        <button type="button" id="toggleOptionalFields">Näytä lisäkentät</button>
+        <div id="optionalFields" style="display: none;">
+          {% for field in reference_fields[reference_type][1] %}
+          <label for="{{ field }}">{{ finnish_fields.get(field, field) | capitalize }}:</label>
+          <input type="text" 
+                 id="{{ field }}" 
+                 name="{{ field }}" 
+                 value="{{ form_data[field] if form_data[field] else '' }}" 
+                 placeholder="Valinnainen tieto">
+          {% endfor %}
+        </div>
+    {% endif %}
+      <button type="submit">Tallenna muutokset</button>
   </form>
 </div>
+
+<br></b>
 <p><a href="/" class="button-link">Takaisin</a></p>
 <script>
   const toggleButton = document.getElementById('toggleOptionalFields');

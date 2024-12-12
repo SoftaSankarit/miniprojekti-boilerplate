@@ -8,29 +8,29 @@ ViiTeX
 {% include "functions/ifmessages.html" %}
 
 
-<div class="form-container">
+<div class="custom_box" style="width: 650px;">
   <form method="POST" action="/create_reference" id="referenceForm">
     <input type="hidden" name="reftype" value="{{ reference_type }}">
     {% if reference_type in reference_fields %}
         <!-- pakolliset kentät -->
         {% for field in reference_fields[reference_type][0] %}
-        <label for="{{ field }}">{{ field | capitalize }}:</label>
+        <label for="{{ field }}">{{ finnish_fields.get(field, field) | capitalize }}:</label>
         <input type="text" 
         id="{{ field }}" 
         name="{{ field }}" 
         value="{{ form_data.get(field, '') if form_data else '' }}"
-        placeholder="Pakollinen kenttä">
+        placeholder="Pakollinen tieto">
         {% endfor %}
         <!-- valinnaiset kentät -->
         <button type="button" id="toggleOptionalFields">Näytä lisäkentät</button>
         <div id="optionalFields" style="display: none;">
           {% for field in reference_fields[reference_type][1] %}
-          <label for="{{ field }}">{{ field | capitalize }}:</label>
+          <label for="{{ field }}">{{ finnish_fields.get(field, field) | capitalize }}:</label>
           <input type="text" 
           id="{{ field }}" 
           name="{{ field }}" 
           value="{{ form_data.get(field, '') if form_data else '' }}"
-          placeholder="Valinnainen kenttä">
+          placeholder="Valinnainen tieto">
           {% endfor %}
         </div>
     {% endif %}

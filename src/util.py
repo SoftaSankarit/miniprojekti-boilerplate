@@ -61,6 +61,32 @@ REFERENCE_FIELDS = {
     ]
 }
 
+FINNISH_FIELDS = {"author":"tekijä",
+    "booktitle": "kirjan nimi",
+    "chapter": "kappale",
+    "journal": "aikakauslehti",
+    "note": "muistiinpano",
+    "number": "numero",
+    "publisher": "kustantaja",
+    "school": "koulu",
+    "title": "teoksen nimi",
+    "type": "tyyppi",
+    "year": "julkaisuvuosi",
+    "address": "osoite",
+    "edition": "painos",
+    "editor": "muokkaaja (editor)",
+    "howpublished": "miten julkaistu",
+    "institution": "instituutio",
+    "issue": "julkaisu",
+    "key": "avain",
+    "miscdetails": "misc lisätieto",
+    "month": "kuukausi",
+    "organization": "organisaatio",
+    "pages": "sivut",
+    "series": "sarja",
+    "volume": "volyymi",
+}
+
 
 def validate_year(year):
     try:

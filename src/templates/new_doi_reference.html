@@ -16,7 +16,7 @@ ViiTeX
     {% if reference_type in reference_fields %}
         <!-- pakolliset kentät -->
         {% for field in reference_fields[reference_type][0] %}
-        <label for="{{ field }}">{{ field | capitalize }}:</label>
+        <label for="{{ field }}">{{ finnish_fields.get(field, field) | capitalize }}:</label>
         <input type="text" 
         id="{{ field }}" 
         name="{{ field }}" 
@@ -25,7 +25,7 @@ ViiTeX
         {% endfor %}
         <!-- valinnaiset kentät -->
         {% for field in reference_fields[reference_type][1] %}
-        <label for="{{ field }}">{{ field | capitalize }}:</label>
+        <label for="{{ field }}">{{ finnish_fields.get(field, field) | capitalize }}:</label>
         <input type="text" 
         id="{{ field }}" 
         name="{{ field }}" 
@@ -38,6 +38,6 @@ ViiTeX
 </div>
 
 <br></b>
-<p><button><a href="/" style="color:aliceblue">Lista Viitteistä</a></button></p>
+<p><a href="/" class="button-link">Lista Viitteistä</a></p>
 
 {% endblock %}

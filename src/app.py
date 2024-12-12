@@ -7,7 +7,7 @@ from db_helper import setup_db
 from repositories.reference_repository \
     import get_references, get_reference_by_id, create_reference, delete_reference, edit_reference, search_references
 from config import app, test_env
-from util import validate_form, find_crossref_type, fill_doi_fields, REFERENCE_FIELDS
+from util import validate_form, find_crossref_type, fill_doi_fields, REFERENCE_FIELDS, FINNISH_FIELDS
 
 
 # Lataa nykyiset kirjat alkunäytölle
@@ -28,7 +28,8 @@ def new_reference(reference_type):
         return render_template("error.html", error="Sivua ei löytynyt.")
     return render_template("new_reference.html",
                            reference_type=reference_type,
-                           reference_fields=REFERENCE_FIELDS)
+                           reference_fields=REFERENCE_FIELDS,
+                           finnish_fields=FINNISH_FIELDS)
 
 
 # Luo viitteen databaseen riippuen syötteistä
@@ -57,6 +58,7 @@ def reference_creation():
             form_data=filled_fields,
             reference_type=reftype,
             reference_fields=REFERENCE_FIELDS,
+            finnish_fields=FINNISH_FIELDS
         )
 
 
@@ -82,7 +84,8 @@ def doi_reference():
         return render_template("new_doi_reference.html",
                             form_data=prefilled_data,
                             reference_type=reference_type,
-                            reference_fields=REFERENCE_FIELDS
+                            reference_fields=REFERENCE_FIELDS,
+                            finnish_fields=FINNISH_FIELDS
                             )
     except Exception as error:
         flash(str(error))
@@ -152,26 +155,43 @@ def delete_entry(entry_type,entry_id):
 @app.route("/edit_entry/<entry_type>/<entry_id>", methods=["GET", "POST"])
 def edit_entry(entry_type,entry_id):
     reference = get_reference_by_id(entry_id)
-    if request.method == "GET":
-        template_path = f"editreferencetypes/{entry_type}.html"
-        return render_template("edit_reference.html", reference=reference, is_edit=True, template_path = template_path)
-    if request.method == "POST":
-        all_options = [
-    "author", "title", "publisher", "year", "howpublished",
-    "institution", "journal", "volume", "number", "address",
-    "organization", "school", "series", "issue", "edition",
-    "chapter", "pages", "url", "key", "month",
-    "type", "booktitle", "editor",
-    "note", "misc_details", "doi"
-]
 
-        optionals = {}
-        for i in all_options:
-            test = request.form.get(i)
-            if test is not None:
-                optionals[i] = test
-        edit_reference(id=entry_id, optionals=optionals)
-        return redirect("/")
+    if request.method == "GET":
+        return render_template(
+            "edit_reference.html",
+            form_data=reference,
+            reference_type=entry_type,
+            reference_fields=REFERENCE_FIELDS,
+            finnish_fields=FINNISH_FIELDS,
+            is_edit=True
+        )
+
+    if request.method == "POST":
+        filled_fields = {}
+        for field in REFERENCE_FIELDS[entry_type][0]:
+            filled_fields[field] = request.form.get(field)
+
+        for field in REFERENCE_FIELDS[entry_type][1]:
+            value = request.form.get(field)
+            if value:
+                filled_fields[field] = value
+        filled_fields["id"] = entry_id
+
+        try:
+            validate_form(entry_type, filled_fields)
+            edit_reference(entry_id, filled_fields)
+            return redirect("/")
+
+        except Exception as error:
+            flash(str(error))
+            return render_template(
+                "edit_reference.html",
+                form_data=filled_fields,
+                reference_type=entry_type,
+                reference_fields=REFERENCE_FIELDS,
+                finnish_fields=FINNISH_FIELDS,
+                is_edit=True
+            )
     return redirect("/")
 
 # testausta varten oleva reitti
