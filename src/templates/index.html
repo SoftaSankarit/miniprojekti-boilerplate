@@ -7,7 +7,7 @@ ViiTeX
 {% block body %}
 <br>
 <br>
-<img src="static/viitex.png" width="350" >
+<center><img src="{{ url_for('static', filename='viitex.png') }}" width="350"></center>
 <br>
 
 <div class="custom_box">   
@@ -120,9 +120,15 @@ ViiTeX
                         {% endif %}
                     </div>
                 </td>
-                <td><button style="color:aliceblue"><a href="/edit_entry/{{reference.reftype}}/{{reference.id}}"></a>Muokkaa</button></td>
-                
-                <td><button style="color:aliceblue" onclick="if (confirm('Haluatko varmasti poistaa?'))"><a href="/delete_entry/reference/{{reference.id}}" >Poista</button></td>
+                <td>
+                    <a href="/edit_entry/{{reference.reftype}}/{{reference.id}}" class="button-link">Muokkaa</a>
+                </td>
+                <td>
+                    <a href="/delete_entry/reference/{{reference.id}}" class="button-link" style="background-color: #fc3939; color: #ffffff;" 
+                    onmouseover="this.style.backgroundColor='#d73a3a'; this.style.color='#000000';" 
+                    onmouseout="this.style.backgroundColor='#fe5858'; this.style.color='#ffffff';"
+                    onclick="return confirm('Haluatko varmasti poistaa viitteen?')">Poista</a>
+                </td>
             </tr>
             {% endfor %}
         </tbody>

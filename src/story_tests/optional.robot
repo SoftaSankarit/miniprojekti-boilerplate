@@ -8,8 +8,8 @@ Test Setup       Reset Todos
 After adding optional info, there is
     Go To  ${HOME_URL}
     Click Element  //button[text()='Lisää uusi viite']
-    Wait Until Element Is Visible  //a[.//span[@class='fi' and text()='Kirja']]
     Scroll Element Into View  //a[.//span[@class='fi' and text()='Kirja']]
+    Wait Until Element Is Visible  //a[.//span[@class='fi' and text()='Kirja']]
     Click Link  //a[.//span[@class='fi' and text()='Kirja']]
     Input Text  author  Erkki Esimerkki
     Input Text  title  Otsikko
