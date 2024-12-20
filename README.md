@@ -6,6 +6,8 @@
 
 [Testikattavuusraportti](https://app.codecov.io/gh/SoftaSankarit/miniprojekti-boilerplate)
 
+[Projektin loppuraportti](https://helsinkifi-my.sharepoint.com/:b:/g/personal/rautiais_ad_helsinki_fi/EVwVIBB-a1hNq41eOt33eoEBOsiygglDlgdG77qx968ZPw?e=lYl7XR)
+
 [![GHA workflow badge](https://github.com/SoftaSankarit/miniprojekti-boilerplate/workflows/CI/badge.svg)](https://github.com/SoftaSankarit/miniprojekti-boilerplate/actions)
 [![codecov](https://codecov.io/gh/SoftaSankarit/miniprojekti-boilerplate/graph/badge.svg?token=1HIWHK3N7W)](https://codecov.io/gh/SoftaSankarit/miniprojekti-boilerplate)
 
